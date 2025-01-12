@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Encuestas</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1 { text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group button { width: 100%; padding: 8px; margin-top: 5px; }
+        .candidate-row { margin-bottom: 10px; }
+        .add-btn, .save-btn { padding: 10px; margin-top: 10px; display: inline-block; background-color: #007bff; color: white; text-align: center; border: none; cursor: pointer; }
+        .add-btn:hover, .save-btn:hover { background-color: #0056b3; }
+        .notification { display: none; padding: 10px; margin-top: 20px; text-align: center; background-color: #4CAF50; color: white; border-radius: 5px; }
+        .delete-btn { background-color: #f44336; color: white; padding: 5px; cursor: pointer; }
+        .delete-btn:hover { background-color: #d32f2f; }
+        .edit-btn { background-color: #ff9800; color: white; padding: 5px; cursor: pointer; }
+        .edit-btn:hover { background-color: #f57c00; }
+    </style>
+</head>
+<body>
+    <h1>Editor de Encuestas</h1>
+    <form id="surveyForm">
+        <div class="form-group">
+            <label for="date">Fecha:</label>
+            <input type="date" id="date" required>
+        </div>
+        <div id="candidatesContainer">
+            <h3>Candidatos</h3>
+        </div>
+        <button type="button" id="addCandidateBtn" class="add-btn">Agregar Candidato</button>
+        <button type="submit" class="save-btn">Guardar Encuesta</button>
+    </form>
+    <div id="notification" class="notification">Encuesta Publicada</div>
+
+    <!-- Lista de encuestas guardadas -->
+    <h3>Encuestas Guardadas</h3>
+    <table id="savedSurveysTable">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las encuestas se generarán dinámicamente aquí -->
+        </tbody>
+    </table>
+
+    <script>
+        const candidatesContainer = document.getElementById('candidatesContainer');
+        const surveyForm = document.getElementById('surveyForm');
+        const notification = document.getElementById('notification');
+        const savedSurveysTable = document.getElementById('savedSurveysTable').getElementsByTagName('tbody')[0];
+
+        // Agregar un nuevo candidato al formulario
+        document.getElementById('addCandidateBtn').addEventListener('click', () => {
+            const row = document.createElement('div');
+            row.className = 'candidate-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Nombre del candidato" class="candidate-name" required>
+                <input type="text" placeholder="Región del candidato" class="candidate-region" required>
+                <input type="number" placeholder="Aprobado (%)" class="aprobado" min="0" max="100" required>
+                <input type="number" placeholder="Desaprobado (%)" class="desaprobado" min="0" max="100" required>
+                <input type="number" placeholder="No sabe/no opina (%)" class="no-sabe" min="0" max="100" required>
+                <input type="file" class="candidate-img" accept="image/*" style="margin-top: 10px;" required>
+            `;
+            candidatesContainer.appendChild(row);
+        });
+
+        // Maneja el guardado de encuestas
+        surveyForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const date = document.getElementById('date').value;
+            const candidates = Array.from(document.querySelectorAll('.candidate-row')).map(row => ({
+                name: row.querySelector('.candidate-name').value,
+                region: row.querySelector('.candidate-region').value,
+                percentages: {
+                    aprobado: parseFloat(row.querySelector('.aprobado').value),
+                    desaprobado: parseFloat(row.querySelector('.desaprobado').value),
+                    noSabe: parseFloat(row.querySelector('.no-sabe').value),
+                },
+                img: row.querySelector('.candidate-img').files[0] ? URL.createObjectURL(row.querySelector('.candidate-img').files[0]) : ''
+            }));
+
+            // Guardar en localStorage
+            const surveys = JSON.parse(localStorage.getItem('surveys')) || {};
+            surveys[date] = { date, candidates };
+            localStorage.setItem('surveys', JSON.stringify(surveys));
+
+            // Mostrar mensaje de notificación
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+
+            loadSavedSurveys();  // Recargar las encuestas guardadas
+        });
+
+        // Cargar encuestas guardadas y mostrar botones de editar y eliminar
+        function loadSavedSurveys() {
+            const surveys = JSON.parse(localStorage.getItem('surveys')) || {};
+            savedSurveysTable.innerHTML = '';
+
+            Object.keys(surveys).forEach(date => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${date}</td>
+                    <td>
+                        <button class="edit-btn" data-date="${date}">Editar</button>
+                        <button class="delete-btn" data-date="${date}">Eliminar</button>
+                    </td>
+                `;
+                row.querySelector('.edit-btn').addEventListener('click', (e) => {
+                    editSurvey(e.target.getAttribute('data-date'));
+                });
+                row.querySelector('.delete-btn').addEventListener('click', (e) => {
+                    deleteSurvey(e.target.getAttribute('data-date'));
+                });
+                savedSurveysTable.appendChild(row);
+            });
+        }
+
+        // Eliminar una encuesta de localStorage
+        function deleteSurvey(date) {
+            const surveys = JSON.parse(localStorage.getItem('surveys')) || {};
+            delete surveys[date];
+            localStorage.setItem('surveys', JSON.stringify(surveys));
+            loadSavedSurveys();  // Recargar la tabla de encuestas
+        }
+
+        // Editar una encuesta
+        function editSurvey(date) {
+            const surveys = JSON.parse(localStorage.getItem('surveys')) || {};
+            const survey = surveys[date];
+
+            // Cargar la fecha en el formulario
+            document.getElementById('date').value = survey.date;
+
+            // Limpiar los candidatos existentes
+            candidatesContainer.innerHTML = '';
+
+            // Cargar los candidatos de la encuesta seleccionada
+            survey.candidates.forEach(candidate => {
+                const row = document.createElement('div');
+                row.className = 'candidate-row';
+                row.innerHTML = `
+                    <input type="text" placeholder="Nombre del candidato" class="candidate-name" value="${candidate.name}" required>
+                    <input type="text" placeholder="Región del candidato" class="candidate-region" value="${candidate.region}" required>
+                    <input type="number" placeholder="Aprobado (%)" class="aprobado" value="${candidate.percentages.aprobado}" min="0" max="100" required>
+                    <input type="number" placeholder="Desaprobado (%)" class="desaprobado" value="${candidate.percentages.desaprobado}" min="0" max="100" required>
+                    <input type="number" placeholder="No sabe/no opina (%)" class="no-sabe" value="${candidate.percentages.noSabe}" min="0" max="100" required>
+                    <input type="file" class="candidate-img" accept="image/*" style="margin-top: 10px;">
+                `;
+                candidatesContainer.appendChild(row);
+            });
+        }
+
+        // Inicializar y cargar las encuestas guardadas cuando la página cargue
+        window.onload = loadSavedSurveys;
+    </script>
+</body>
+</html>

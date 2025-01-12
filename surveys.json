@@ -1,0 +1,26 @@
+{
+    "2025-01-11": {
+        "candidates": [
+            {
+                "name": "Candidato 1",
+                "region": "Apurímac",
+                "img": "https://link-a-la-imagen.com/candidato1.jpg",
+                "percentages": {
+                    "aprobado": 70,
+                    "desaprobado": 20,
+                    "noSabe": 10
+                }
+            },
+            {
+                "name": "Candidato 2",
+                "region": "Urubamba",
+                "img": "https://link-a-la-imagen.com/candidato2.jpg",
+                "percentages": {
+                    "aprobado": 50,
+                    "desaprobado": 40,
+                    "noSabe": 10
+                }
+            }
+        ]
+    }
+}
