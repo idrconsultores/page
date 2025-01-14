@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Candidatos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .section-container {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #fff;
+        }
+
+        .section-container h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .candidate-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .candidate-row input[type="text"],
+        .candidate-row input[type="number"] {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .candidate-row input[type="file"] {
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            color: white;
+            background-color: #2196F3;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn.danger {
+            background-color: #f44336;
+        }
+
+        .btn.add-section {
+            display: block;
+            margin: 20px auto;
+        }
+
+        .btn:disabled {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>INTENCIÓN DE VOTO</h1>
+    <div id="sectionsContainer">
+        <!-- Secciones dinámicamente renderizadas aquí -->
+    </div>
+    <button class="btn add-section" onclick="addSection()">Agregar Nueva Fila</button>
+    <button class="btn" onclick="saveData()">Guardar Cambios</button>
+
+    <script>
+        let candidatesData = JSON.parse(localStorage.getItem('candidatesData')) || [];
+
+        function renderSections() {
+            const container = document.getElementById('sectionsContainer');
+            container.innerHTML = '';
+
+            candidatesData.forEach((section, sectionIndex) => {
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'section-container';
+
+                sectionElement.innerHTML = `
+                    <h2 contenteditable="true" onblur="updateSectionTitle(${sectionIndex}, this.innerText)">
+                        ${section.title || "Título de la fila"}
+                    </h2>
+                    ${section.candidates.map((candidate, candidateIndex) => `
+                        <div class="candidate-row">
+                            <input type="text" value="${candidate.name}" placeholder="Nombre" 
+                                   onchange="updateCandidate(${sectionIndex}, ${candidateIndex}, 'name', this.value)">
+                            <input type="number" value="${candidate.percentage}" placeholder="Porcentaje" 
+                                   onchange="updateCandidate(${sectionIndex}, ${candidateIndex}, 'percentage', this.value)">
+                            <input type="file" onchange="updateCandidateImage(${sectionIndex}, ${candidateIndex}, this)">
+                            <button class="btn danger" onclick="deleteCandidate(${sectionIndex}, ${candidateIndex})">Eliminar</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn" onclick="addCandidate(${sectionIndex})">Agregar Candidato</button>
+                    <button class="btn danger" onclick="deleteSection(${sectionIndex})">Eliminar Fila</button>
+                `;
+
+                container.appendChild(sectionElement);
+            });
+        }
+
+        function addSection() {
+            const title = prompt('Introduce el título de la fila (Ejemplo: Presidencia, Loreto):');
+            if (!title) return;
+
+            candidatesData.push({ title, candidates: [] });
+            renderSections();
+        }
+
+        function addCandidate(sectionIndex) {
+            candidatesData[sectionIndex].candidates.push({ name: '', percentage: 0, image: '' });
+            renderSections();
+        }
+
+        function deleteSection(index) {
+            if (confirm('¿Estás seguro de eliminar esta fila?')) {
+                candidatesData.splice(index, 1);
+                renderSections();
+            }
+        }
+
+        function deleteCandidate(sectionIndex, candidateIndex) {
+            if (confirm('¿Estás seguro de eliminar este candidato?')) {
+                candidatesData[sectionIndex].candidates.splice(candidateIndex, 1);
+                renderSections();
+            }
+        }
+
+        function updateCandidate(sectionIndex, candidateIndex, key, value) {
+            candidatesData[sectionIndex].candidates[candidateIndex][key] = value;
+        }
+
+        function updateCandidateImage(sectionIndex, candidateIndex, input) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                candidatesData[sectionIndex].candidates[candidateIndex].image = reader.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function updateSectionTitle(index, value) {
+            candidatesData[index].title = value;
+        }
+
+        function saveData() {
+            localStorage.setItem('candidatesData', JSON.stringify(candidatesData));
+            alert('Datos guardados correctamente');
+        }
+
+        renderSections();
+    </script>
+</body>
+</html>
