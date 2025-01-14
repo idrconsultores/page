@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticia Detallada</title>
+    
+    <!-- Open Graph Meta Tags para Facebook -->
+    <meta property="og:title" content="Proponen crear el nuevo Banco Minero para favorecer a los mineros informales">
+    <meta property="og:description" content="La propuesta del congresista Óscar Zea, de la Bancada del Bloque Magisterial, plantea reactivar el Banco Minero">
+    <meta property="og:image" content="images/noticia1.png">
+    <meta property="og:url" content="https://tusitio.com/noticia-detalhada">
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 15px 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb span {
+            color: #5f6368;
+        }
+
+        .breadcrumb a:hover {
+            color: #174ea6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        /* Estilo del artículo principal */
+        .main-article {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .main-article img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .main-article h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Contenedor de acciones */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 24px;
+            background-color: #f8f9fa;
+            color: #1a73e8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            border: 1px solid #dadce0;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #f1f3f4;
+            border-color: #1a73e8;
+        }
+
+        .social-share {
+            display: flex;
+            gap: 15px;
+        }
+
+        .share-facebook {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 24px;
+            background-color: #1877f2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .share-facebook:hover {
+            background-color: #166fe5;
+            transform: translateY(-1px);
+        }
+
+        /* Barra lateral moderna */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-section {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 18px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 10px;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background-color: #f8f9fa;
+            border-radius: 20px;
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .newsletter-form {
+            margin-top: 15px;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .newsletter-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background-color: #174ea6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+                margin-top: 30px;
+            }
+
+            .main-article h1 {
+                font-size: 24px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .social-share {
+                width: 100%;
+            }
+
+            .share-facebook {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .back-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="breadcrumb">
+            <a href="index.html">Inicio</a>
+            <span>›</span>
+            <a href="noticias.html">Noticias</a>
+            <span>›</span>
+            <span>Actualidad</span>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Artículo Principal -->
+        <div class="main-article">
+            <h1>Proponen crear el nuevo Banco Minero para favorecer a los mineros informales</h1>
+            <div class="meta">
+                14 de enero de 2025
+            </div>
+            <img src="images/mineros.jpg" alt="Proponen crear el nuevo Banco Minero">
+            <div class="content">
+              
+                <p>
+                    La propuesta del congresista Óscar Zea, de la Bancada del Bloque Magisterial, plantea reactivar el Banco Minero, que en 1992 entró en proceso de liquidación que concluyó en el 2008.
+                </p>
+                <p>
+                    Esta propuesta ya se venía venir. Aparte de que el Ejecutivo -en pared con el Congreso- ha ampliado hasta por un año el Reinfo, que favorece de forma indirecta a los mineros ilegales, porque estos últimos usan los papeles de esa base de datos, para transportar y comercializar el oro sucio, los mineros ilegales estarían muy cerca de tener su propio banco, en el que podrían obtener préstamos de dinero con tasas especiales para su sector.
+                </p>
+
+                  <p>
+                   Esto, poir que esa iniciativa fue dada primero a conocer por el ministro de Energía y Minas, Jorge Luis Montero, en una reunión que sostuvieron el 13 de diciembre pasado, tal como lo reveló Perú21.
+
+La bancada del Bloque Magisterial, conformada por los congresistas del sindicato del golpista Pedro Castillo, Fenatep, ha presentado un generoso proyecto de ley para reactivar el desactivado Banco Minero, que funcionó hasta 1991, y que un año después ingresó en proceso de liquidación que acabó en el 2008.
+                      
+                      La iniciativa del nuevo Banco Minero BM fue presentada el pasado jueves 9 de este mes.
+
+Perú21 reveló que ese 13 de diciembre, el ministro Montero, tras sostener una reunión con los mineros informales de Confemin -encabezados por su presidente Máximo Franco, militante de Renovación Popular-, les prometió crear un banco minero.
+
+PUBLICIDAD
+Una vez concluida la reunión, el ministerio de Energía y Minas (Minem) sacó un comunicado en el que dio a conocer que impulsará  la creación de un Fondo Minero para la Pequeña Minería y Minería Artesanal, que traducido al buen cristiano es un banco para los mineros informales.
+
+Montero les dijo en esa reunión -según el comunicado- que los mineros que deseen participar de los beneficios  de este fondo podrán inscribirse y comprometerse a aportar un gravamen anual de 0.5% que podría ascender a unos 50 millones de dólares al año.
+
+Con este proyecto de ley, todo indica que en caso pase al Pleno y se apruebe, el Ejecutivo apoyará esta propuesta.
+
+Esta sería una nueva victoria para los mineros informales porque ahora, después de conseguir que se retire la Sociedad Nacional de Minería de la mesa de trabajo en la Comisión de Energía, están participando en la elaboración de la nueva ley MAPE, en la que podrían recibir que obtengan concesiones mineras de forma exprés y que les financien los estudios ambientales.
+
+Esto, lo reveló Perú21 la semana pasada.
+
+<br>
+<br>
+                      
+MINERÍA ILEGAL EN PARED CON LA MINERÍA INFORMAL
+
+El exviceministro del Interior, Ricardo Valdés, ha señalado a Perú21 que los mineros ilegales usan los papeles del Reinfo, al que pertenecen los mineros informales, que se los proporcionan los que tienen ese documento vigente, para transportar explosivos y el millonario oro sucio para comercializarlo.
+
+Según el exministro del Interior, Carlos Basombrío, en una comunicación con este medio, ha indicado que la minería ilegal mueve al año 6 mil millones de dólares, y que esa cifra es cuatro veces mayor a lo que comercializa el narcotráfico.
+
+Eso no es todo. El presidente de la Asociación de Mineros Artesanales de Pataz, Ama-Pataz, José Torrealva, dijo a este medio que en su distrito ubicado en La Libertad, al día, un minero informal puede llenar una volqueta de oro cuya carga está valorizada entre 15 mil a 20 mil dólares. Y que, además, un minero informal puede comercializar entre una y cuatro cargas al mes.
+
+Es decir, en Pataz, un minero informal de su gremio, compuesto por 1,500 hombres, puede obtener ganancias de más de 80 mil dólares al mes. Negocio redondo.
+                      Este proyecto de ley, sin dudas, será priorizado en la Comisión de Energía y Minas porque el presidente de la misma es Paul Gutiérrez, del Bloque Magisterial, recordado por haber sacado cara por el Movadef tras ser declarada como proscrita por el Poder Judicial.
+
+Eso, ni qué decir de las vinculaciones de la Fenatep con el Movadef, que reiteradas veces hemos dado a conocer en este diario.
+                </p>
+                <!-- compartir facebook -->
+               <div class="action-buttons">
+    <a href="noticias.html" class="back-button">← Volver a noticias</a>
+    <div class="social-share">
+        <a href="#" 
+           target="_blank" 
+           class="share-facebook" 
+           id="share-facebook">
+            Compartir en Facebook
+        </a>
+    </div>
+</div>
+
+<script>
+    document.getElementById("share-facebook").addEventListener("click", function(event) {
+        event.preventDefault();
+        var currentUrl = window.location.href; // Obtiene la URL de la página actual
+        var facebookUrl = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(currentUrl);
+        window.open(facebookUrl, "_blank", "width=600,height=400");
+    });
+</script>
+     <!-- fin compartir facebook -->           
+                
+                
+                
+                
+        </div>
+
+        <!-- Barra Lateral Moderna -->
+        <aside class="sidebar">
+            <section class="sidebar-section">
+                <h3 class="sidebar-title">Temas Relacionados</h3>
+                <div class="tag-cloud">
+                    <a href="#" class="tag">Política Local</a>
+                    <a href="#" class="tag">Maynas</a>
+                    <a href="#" class="tag">Comunidad</a>
+                    <a href="#" class="tag">Eventos Sociales</a>
+                    <a href="#" class="tag">Fuerza Popular</a>
+                </div>
+            </section>
+
+         
+        </aside>
+    </div>
+</body>
+</html>
