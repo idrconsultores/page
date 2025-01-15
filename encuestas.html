@@ -197,7 +197,59 @@
 
 
 
+<div id="pollsContainer" class="polls-container">
+        <!-- Encuestas cargadas dinámicamente -->
+    </div>
+
+    <script>
+        async function loadSurveys() {
+            try {
+                const response = await fetch('datos.json');
+                if (!response.ok) throw new Error('No se pudo cargar el archivo JSON.');
+                const surveys = await response.json();
+
+                const container = document.getElementById('pollsContainer');
+                container.innerHTML = '';
+
+                surveys.forEach(survey => {
+                    const section = document.createElement('div');
+                    section.innerHTML = `
+                        <h2>Fecha: ${survey.date}</h2>
+                        ${survey.candidates.map(candidate => `
+                            <div class="candidate-row">
+                                <div class="candidate-info">
+                                    <img src="${candidate.img || 'https://via.placeholder.com/50'}" alt="${candidate.name}">
+                                    <span>${candidate.name} (${candidate.region})</span>
+                                </div>
+                                <div class="bars-container">
+                                    <div class="bar bar-aprobado" style="width: ${candidate.percentages.aprobado}%;">${candidate.percentages.aprobado}%</div>
+                                    <div class="bar bar-desaprobado" style="width: ${candidate.percentages.desaprobado}%;">${candidate.percentages.desaprobado}%</div>
+                                    <div class="bar bar-no-sabe" style="width: ${candidate.percentages.noSabe}%;">${candidate.percentages.noSabe}%</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    `;
+                    container.appendChild(section);
+                });
+            } catch (error) {
+                console.error('Error al cargar las encuestas:', error);
+            }
+        }
+
+        loadSurveys();
+    </script>
+
+
+
+
+
+
+
 <title>Gráfica de Candidatos</title>
+   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Candidatos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -324,6 +376,98 @@
             }
         }
     </style>
+</head>
+<body>
+    <h1>INTENCIÓN DE VOTO</h1>
+    <div id="sectionsContainer">
+        <!-- Secciones dinámicamente renderizadas aquí -->
+    </div>
+    <button class="btn add-section" onclick="addSection()">Agregar Nueva Fila</button>
+    <button class="btn" onclick="saveData()">Guardar Cambios</button>
+
+    <script>
+        let candidatesData = JSON.parse(localStorage.getItem('candidatesData')) || [];
+
+        function renderSections() {
+            const container = document.getElementById('sectionsContainer');
+            container.innerHTML = '';
+
+            candidatesData.forEach((section, sectionIndex) => {
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'section-container';
+
+                sectionElement.innerHTML = `
+                    <h2 contenteditable="true" onblur="updateSectionTitle(${sectionIndex}, this.innerText)">
+                        ${section.title || "Título de la fila"}
+                    </h2>
+                    ${section.candidates.map((candidate, candidateIndex) => `
+                        <div class="candidate-row">
+                            <input type="text" value="${candidate.name}" placeholder="Nombre" 
+                                   onchange="updateCandidate(${sectionIndex}, ${candidateIndex}, 'name', this.value)">
+                            <input type="number" value="${candidate.percentage}" placeholder="Porcentaje" 
+                                   onchange="updateCandidate(${sectionIndex}, ${candidateIndex}, 'percentage', this.value)">
+                            <input type="file" onchange="updateCandidateImage(${sectionIndex}, ${candidateIndex}, this)">
+                            <button class="btn danger" onclick="deleteCandidate(${sectionIndex}, ${candidateIndex})">Eliminar</button>
+                        </div>
+                    `).join('')}
+                    <button class="btn" onclick="addCandidate(${sectionIndex})">Agregar Candidato</button>
+                    <button class="btn danger" onclick="deleteSection(${sectionIndex})">Eliminar Fila</button>
+                `;
+
+                container.appendChild(sectionElement);
+            });
+        }
+
+        function addSection() {
+            const title = prompt('Introduce el título de la fila (Ejemplo: Presidencia, Loreto):');
+            if (!title) return;
+
+            candidatesData.push({ title, candidates: [] });
+            renderSections();
+        }
+
+        function addCandidate(sectionIndex) {
+            candidatesData[sectionIndex].candidates.push({ name: '', percentage: 0, image: '' });
+            renderSections();
+        }
+
+        function deleteSection(index) {
+            if (confirm('¿Estás seguro de eliminar esta fila?')) {
+                candidatesData.splice(index, 1);
+                renderSections();
+            }
+        }
+
+        function deleteCandidate(sectionIndex, candidateIndex) {
+            if (confirm('¿Estás seguro de eliminar este candidato?')) {
+                candidatesData[sectionIndex].candidates.splice(candidateIndex, 1);
+                renderSections();
+            }
+        }
+
+        function updateCandidate(sectionIndex, candidateIndex, key, value) {
+            candidatesData[sectionIndex].candidates[candidateIndex][key] = value;
+        }
+
+        function updateCandidateImage(sectionIndex, candidateIndex, input) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                candidatesData[sectionIndex].candidates[candidateIndex].image = reader.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+
+        function updateSectionTitle(index, value) {
+            candidatesData[index].title = value;
+        }
+
+        function saveData() {
+            localStorage.setItem('candidatesData', JSON.stringify(candidatesData));
+            alert('Datos guardados correctamente');
+        }
+
+        renderSections();
+    </script>
 </head>
 
 
