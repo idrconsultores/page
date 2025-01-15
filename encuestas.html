@@ -1,203 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-   <meta name="keywords" content="IDR Consultores" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-<meta property="og:image" content="https://i.ibb.co/Zg4vMt6/logoidr1.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuestas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-  <title>IDR encuestas</title>
+        h1 {
+            text-align: center;
+        }
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        .polls-container {
+            margin-bottom: 40px;
+        }
 
-  <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+        .candidate-row {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
 
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+        .candidate-row img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
 
-  <!-- Estilos agregados del index.html -->
-  <style>
-    .legend {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
+        .candidate-info {
+            display: flex;
+            align-items: center;
+        }
 
-    .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
+        .bars-container {
+            margin-top: 10px;
+            display: flex;
+            gap: 5px;
+        }
 
-    .legend-color {
-        width: 20px;
-        height: 20px;
-    }
+        .bar {
+            flex-grow: 1;
+            height: 20px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+        }
 
-    .polls-container {
-        margin-bottom: 40px;
-    }
+        .bar-aprobado {
+            background-color: #4caf50;
+        }
 
-    .candidate-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        gap: 10px;
-    }
+        .bar-desaprobado {
+            background-color: #f44336;
+        }
 
-    .candidate-info {
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-    }
-
-    .candidate-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #ddd;
-    }
-
-    .bars-container {
-        flex-grow: 1;
-        height: 30px;
-        display: flex;
-        background: #f0f0f0;
-    }
-
-    .bar {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 12px;
-    }
-
-    .bar-aprobado { background-color: #2196F3; }
-    .bar-desaprobado { background-color: #f44336; }
-    .bar-no-sabe { background-color: #FF9800; }
-
-    .dates-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    .dates-table th {
-        background-color: #f5f5f5;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .dates-table td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        cursor: pointer;
-    }
-
-    .dates-table tr:hover {
-        background-color: #f0f0f0;
-    }
-  </style>
-   
+        .bar-no-sabe {
+            background-color: #ff9800;
+        }
+    </style>
 </head>
 
-<body class="sub_page">
-
-  <div class="hero_area">
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <img src="images/logoidr.png" alt="Logo" class="logo-img" style="max-height: 50px;">
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="encuestas.html"> Encuestas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="noticias.html">Noticias</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacto.html">Contáctanos</a>
-              </li>
-            </ul>
-            <div class="quote_btn-container">
-              <a href="" class="quote_btn">
-                Get A Quote
-              </a>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-  </div>
-    
-    </br>
-    <h1 style="text-align: center;">REGISTRO DE EVALUACIÓN DE GESTIÓN</h1>
-    
-     <!-- Inicio del contenido agregado del index.html -->
-  <div class="container">
-    <div class="legend">
-        <div class="legend-item">
-            <div class="legend-color" style="background-color: #2196F3;"></div>
-            <span>Aprobado</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background-color: #f44336;"></div>
-            <span>Desaprobado</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background-color: #FF9800;"></div>
-            <span>No sabe/no opina</span>
-        </div>
-    </div>
-
+<body>
+    <h1>Encuestas Guardadas</h1>
     <div id="pollsContainer" class="polls-container">
-        <!-- Las barras se generarán dinámicamente -->
-    </div>
-
-    <table class="dates-table">
-        <thead>
-            <tr>
-                <th>FECHA</th>
-            </tr>
-        </thead>
-        <tbody id="datesTableBody">
-            <!-- Las fechas se generarán dinámicamente -->
-        </tbody>
-    </table>
-  </div>
-  <!-- Fin del contenido agregado del index.html -->
-
-
-
-
-
-<div id="pollsContainer" class="polls-container">
         <!-- Encuestas cargadas dinámicamente -->
     </div>
 
@@ -238,463 +111,6 @@
 
         loadSurveys();
     </script>
-
-
-
-
-
-
-
-<title>Gráfica de Candidatos</title>
-   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Candidatos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 32px;
-            margin: 20px 0;
-            color: #333;
-            text-transform: uppercase;
-        }
-
-        .section {
-            position: relative;
-            margin: 5px auto; /* Espaciado reducido entre filas */
-            width: 90%;
-            background-color: #fff;
-            padding: 5px 0;
-        }
-
-        .candidates-row {
-            display: flex;
-            overflow-x: auto;
-            gap: 5px;
-            padding: 10px 0;
-            scroll-behavior: smooth;
-        }
-
-        .candidate {
-            flex: 0 0 150px; /* Tamaño de cada tarjeta */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .candidate img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin-bottom: 8px;
-        }
-
-        .candidate h3 {
-            font-size: 14px;
-            margin: 5px 0;
-            color: #333;
-        }
-
-        .candidate p {
-            font-size: 14px;
-            font-weight: bold;
-            margin: 0;
-            padding: 5px;
-            color: #fff;
-            border-radius: 4px;
-            width: 80%;
-            text-align: center;
-        }
-
-        /* Botones de navegación */
-        .nav-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.1);
-            color: #333;
-            border: none;
-            border-radius: 3px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 100;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .nav-button:hover {
-            opacity: 1;
-            background-color: rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-button.left {
-            left: -10px;
-        }
-
-        .nav-button.right {
-            right: -10px;
-        }
-
-        .candidates-row::-webkit-scrollbar {
-            display: none; /* Ocultar scrollbar nativo */
-        }
-
-        /* Responsive para pantallas móviles */
-        @media (max-width: 768px) {
-            .candidate {
-                flex: 0 0 120px; /* Más pequeño en móvil */
-            }
-
-            .candidate img {
-                width: 60px;
-                height: 60px;
-            }
-
-            .candidate h3 {
-                font-size: 12px;
-            }
-
-            .candidate p {
-                font-size: 12px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>INTENCIÓN DE VOTO</h1>
-    <div id="sectionsContainer">
-        <!-- Secciones dinámicamente renderizadas aquí -->
-    </div>
-    <button class="btn add-section" onclick="addSection()">Agregar Nueva Fila</button>
-    <button class="btn" onclick="saveData()">Guardar Cambios</button>
-
-    <script>
-        let candidatesData = JSON.parse(localStorage.getItem('candidatesData')) || [];
-
-        function renderSections() {
-            const container = document.getElementById('sectionsContainer');
-            container.innerHTML = '';
-
-            candidatesData.forEach((section, sectionIndex) => {
-                const sectionElement = document.createElement('div');
-                sectionElement.className = 'section-container';
-
-                sectionElement.innerHTML = `
-                    <h2 contenteditable="true" onblur="updateSectionTitle(${sectionIndex}, this.innerText)">
-                        ${section.title || "Título de la fila"}
-                    </h2>
-                    ${section.candidates.map((candidate, candidateIndex) => `
-                        <div class="candidate-row">
-                            <input type="text" value="${candidate.name}" placeholder="Nombre" 
-                                   onchange="updateCandidate(${sectionIndex}, ${candidateIndex}, 'name', this.value)">
-                            <input type="number" value="${candidate.percentage}" placeholder="Porcentaje" 
-                                   onchange="updateCandidate(${sectionIndex}, ${candidateIndex}, 'percentage', this.value)">
-                            <input type="file" onchange="updateCandidateImage(${sectionIndex}, ${candidateIndex}, this)">
-                            <button class="btn danger" onclick="deleteCandidate(${sectionIndex}, ${candidateIndex})">Eliminar</button>
-                        </div>
-                    `).join('')}
-                    <button class="btn" onclick="addCandidate(${sectionIndex})">Agregar Candidato</button>
-                    <button class="btn danger" onclick="deleteSection(${sectionIndex})">Eliminar Fila</button>
-                `;
-
-                container.appendChild(sectionElement);
-            });
-        }
-
-        function addSection() {
-            const title = prompt('Introduce el título de la fila (Ejemplo: Presidencia, Loreto):');
-            if (!title) return;
-
-            candidatesData.push({ title, candidates: [] });
-            renderSections();
-        }
-
-        function addCandidate(sectionIndex) {
-            candidatesData[sectionIndex].candidates.push({ name: '', percentage: 0, image: '' });
-            renderSections();
-        }
-
-        function deleteSection(index) {
-            if (confirm('¿Estás seguro de eliminar esta fila?')) {
-                candidatesData.splice(index, 1);
-                renderSections();
-            }
-        }
-
-        function deleteCandidate(sectionIndex, candidateIndex) {
-            if (confirm('¿Estás seguro de eliminar este candidato?')) {
-                candidatesData[sectionIndex].candidates.splice(candidateIndex, 1);
-                renderSections();
-            }
-        }
-
-        function updateCandidate(sectionIndex, candidateIndex, key, value) {
-            candidatesData[sectionIndex].candidates[candidateIndex][key] = value;
-        }
-
-        function updateCandidateImage(sectionIndex, candidateIndex, input) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                candidatesData[sectionIndex].candidates[candidateIndex].image = reader.result;
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-
-        function updateSectionTitle(index, value) {
-            candidatesData[index].title = value;
-        }
-
-        function saveData() {
-            localStorage.setItem('candidatesData', JSON.stringify(candidatesData));
-            alert('Datos guardados correctamente');
-        }
-
-        renderSections();
-    </script>
-</head>
-
-
-
-</br>
-    <h2 style="text-align: center;">INTENCIÓN DE VOTO 2026</h2>
-    <div id="sectionsContainer">
-        <!-- Las filas de candidatos dinámicamente se generan aquí -->
-    </div>
-
-    <script>
-        const colors = ['#9c27b0', '#f44336', '#ff9800', '#4caf50', '#2196f3'];
-        const data = JSON.parse(localStorage.getItem('candidatesData')) || [];
-
-        function renderSections() {
-            const container = document.getElementById('sectionsContainer');
-            container.innerHTML = '';
-
-            data.forEach((section, sectionIndex) => {
-                const sectionElement = document.createElement('div');
-                sectionElement.className = 'section';
-
-                sectionElement.innerHTML = `
-                    <h2>${section.title}</h2>
-                    <button class="nav-button left" onclick="scrollLeft(${sectionIndex})">◀</button>
-                    <div class="candidates-row" id="row-${sectionIndex}">
-                        ${section.candidates.map((candidate, index) => `
-                            <div class="candidate">
-                                <img src="${candidate.image || 'https://via.placeholder.com/80'}" alt="${candidate.name}">
-                                <h3>${candidate.name || 'Candidato'}</h3>
-                                <p style="background-color: ${colors[index % colors.length]}">${candidate.percentage || 0}%</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <button class="nav-button right" onclick="scrollRight(${sectionIndex})">▶</button>
-                `;
-
-                container.appendChild(sectionElement);
-            });
-        }
-
-        function scrollLeft(sectionIndex) {
-            const row = document.getElementById(`row-${sectionIndex}`);
-            row.scrollBy({ left: -200, behavior: 'smooth' });
-        }
-
-        function scrollRight(sectionIndex) {
-            const row = document.getElementById(`row-${sectionIndex}`);
-            row.scrollBy({ left: 200, behavior: 'smooth' });
-        }
-
-        renderSections();
-    </script>
-
-
-
-
-<body>
-    
-
-  
-
-
-  
- 
-   
-  </div>
-
-  <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
-  <script src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
-
-
-
-
-
-  <!-- Script agregado del index.html -->
-  <script>
-    // Obtener encuestas desde localStorage
-    function getSurveysFromStorage() {
-        return JSON.parse(localStorage.getItem('surveys')) || {};
-    }
-
-    // Actualizar la vista con los datos de la encuesta seleccionada
-    function updatePollsDisplay(date) {
-        const surveys = getSurveysFromStorage();
-        const container = document.getElementById('pollsContainer');
-        container.innerHTML = '';
-
-        if (!surveys[date]) return;
-
-        const survey = surveys[date];
-        for (const candidate of survey.candidates) {
-            const row = document.createElement('div');
-            row.className = 'candidate-row';
-
-            const candidateInfo = document.createElement('div');
-            candidateInfo.className = 'candidate-info';
-
-            const img = document.createElement('img');
-            img.className = 'candidate-img';
-            img.src = candidate.img || '';
-            
-            const name = document.createElement('span');
-            name.textContent = candidate.name;
-
-            const region = document.createElement('span');
-            region.textContent = candidate.region;
-
-            candidateInfo.appendChild(img);
-            candidateInfo.appendChild(name);
-            candidateInfo.appendChild(region);
-            row.appendChild(candidateInfo);
-
-            const barsContainer = document.createElement('div');
-            barsContainer.className = 'bars-container';
-
-            const categories = ['aprobado', 'desaprobado', 'noSabe'];
-            const colors = ['aprobado', 'desaprobado', 'no-sabe'];
-            categories.forEach((category, index) => {
-                const value = candidate.percentages[category];
-                if (value > 0) {
-                    const bar = document.createElement('div');
-                    bar.className = `bar bar-${colors[index]}`;
-                    bar.style.width = `${value}%`;
-                    bar.textContent = `${value}%`;
-                    barsContainer.appendChild(bar);
-                }
-            });
-
-            row.appendChild(barsContainer);
-            container.appendChild(row);
-        }
-    }
-
-    // Cargar la tabla de fechas
-    function loadDatesTable() {
-        const datesTableBody = document.getElementById('datesTableBody');
-        const surveys = getSurveysFromStorage();
-
-        Object.keys(surveys).forEach(date => {
-            const row = document.createElement('tr');
-            row.innerHTML = `<td>${date}</td>`;
-            row.addEventListener('click', () => updatePollsDisplay(date));
-            datesTableBody.appendChild(row);
-        });
-    }
-
-    // Inicializar
-    window.onload = () => {
-        loadDatesTable();
-        const surveys = getSurveysFromStorage();
-        const firstDate = Object.keys(surveys)[0];
-        if (firstDate) {
-            updatePollsDisplay(firstDate);
-        }
-    };
-  </script>
-
-  <div class="footer_container">
-   <!-- Info Section -->
-<section class="info_section">
-  <div class="container">
-    <div class="row">
-      <!-- Company Information -->
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="info_detail">
-          <h4 class="mb-3">IDR Consultores</h4>
-          <p>"Nos especializamos en realizar encuestas con un enfoque preciso y profesional, brindando información clave para el desarrollo y análisis"</p>
-        </div>
-      </div>
-      <!-- Contact Information -->
-      <div class="col-md-6 col-lg-4 mb-4">
-        <div class="info_contact">
-          <h4 class="mb-3">Contáctanos</h4>
-          <div class="contact_link_box">
-            <p>
-              <i class="fa fa-map-marker" aria-hidden="true"></i>
-              Iquitos, Perú
-            </p>
-            <p>
-              <i class="fa fa-phone" aria-hidden="true"></i>
-              +51 917 183 289
-            </p>
-            <p>
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              idrconsultoreseirl@gmail.com
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- Social Media -->
-     <div class="col-md-6 col-lg-4 mb-4">
-    <div class="info_social">
-        <h4 class="mb-3">Síguenos:</h4>
-        <div style="margin-bottom: 10px;"></div> <!-- Espacio entre el texto y los iconos -->
-        <a href="https://www.facebook.com/profile.php?id=61557466626804&locale=es_LA" target="_blank" class="mr-2">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-        </a>
-        <a href="https://www.instagram.com/TuPaginaInstagram" target="_blank" class="mr-2">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-        </a>
-    </div>
-</div>
-</section>
-<!-- End Info Section -->>
-
-    <!-- footer section -->
-    <footer class="footer_section">
-      <div class="container">
-        <p>
-          &copy; <span id="displayYear"></span> Todos los derechos reservados
-  
-        </p>
-      </div>
-    </footer>
-    <!-- footer section -->
-
-
-
 </body>
+
 </html>
