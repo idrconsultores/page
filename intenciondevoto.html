@@ -1,0 +1,2151 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row =>
+                    row.some(cell => cell !== '' && cell !== null && cell !== undefined)
+                );
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Encuesta por Provincia</title>
+<style>
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #f8f9fa;
+      --border-color: #e0e0e0;
+      --text-color: #333;
+      --highlight-color: #2980b9;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      color: var(--text-color);
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .province-selector {
+      margin-bottom: 30px;
+      max-width: 300px;
+    }
+    
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: white;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: var(--highlight-color);
+      box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.3);
+    }
+    
+    .poll-section {
+      margin-bottom: 25px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .poll-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+    
+    .candidates-container {
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      gap: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-color) var(--secondary-color);
+    }
+    
+    .candidates-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    .candidates-container::-webkit-scrollbar-track {
+      background: var(--secondary-color);
+      border-radius: 10px;
+    }
+    
+    .candidates-container::-webkit-scrollbar-thumb {
+      background-color: var(--primary-color);
+      border-radius: 10px;
+    }
+    
+    .candidate-card {
+      min-width: 120px;
+      flex: 0 0 auto;
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s;
+    }
+    
+    .candidate-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .candidate-img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      overflow: hidden;
+      background-color: #FFC107;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .candidate-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .candidate-name {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .percentage {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 15px;
+      color: white;
+      font-weight: bold;
+      font-size: 13px;
+    }
+    
+    /* Responsive design */
+    @media (min-width: 768px) {
+      .candidates-container {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .candidate-card {
+        margin-bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .candidates-container {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 15px;
+      }
+      
+      .poll-section::after {
+        content: "≫";
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(0,0,0,0.3);
+        font-size: 24px;
+        pointer-events: none;
+      }
+      
+      .poll-section {
+        position: relative;
+      }
+    }
+    
+    /* Scroll indicator for mobile */
+    .scroll-indicator {
+      display: none;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: -10px;
+      margin-bottom: 10px;
+    }
+    
+    @media (max-width: 767px) {
+      .scroll-indicator {
+        display: block;
+      }
+    }
+
+    .province-data {
+      display: none;
+    }
+
+    .province-data.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<h1>ENCUESTA INTENCIÓN DE VOTO </h1>
+    <br>
+    <h3>Del 02 al 12 de Abril del 2025 </h3>
+    <br>
+    <br>
+<div class="province-selector">
+<select id="province-select">
+<option value="maynas">Maynas</option>
+<option value="alto-amazonas">Alto Amazonas</option>
+<option value="requena">Requena</option>
+<option value="loreto">Loreto</option>
+<option value="mariscal-ramon-castilla">Mariscal Ramón Castilla</option>
+</select>
+</div>
+<!-- MAYNAS -->
+<div class="province-data active" id="maynas-data">
+<section class="poll-section">
+<h2>Candidatos Presidente de la República - Maynas</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Keiko Fujimori" src="images/keyko.png"/>
+</div>
+<div class="candidate-name">Keiko Fujimori</div>
+<div class="percentage">17%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Antauro Humala" src="images/antauro.png"/>
+</div>
+<div class="candidate-name">Antauro Humala</div>
+<div class="percentage">9%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Antauro Humala" src="images/carlosa.png"/>
+</div>
+<div class="candidate-name">Carlos Alvarez</div>
+<div class="percentage">8%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="César Acuña" src="images/cesar1.png"/>
+</div>
+<div class="candidate-name">César Acuña</div>
+<div class="percentage">6%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Hernando de Soto" src="images/hernando.png"/>
+</div>
+<div class="candidate-name">Hernando de Soto</div>
+<div class="percentage">7%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rafael Lopez A." src="images/rafael.png"/>
+</div>
+<div class="candidate-name">Rafael Lopez A.</div>
+<div class="percentage">14%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="George Forsyth" src="images/george.png"/>
+</div>
+<div class="candidate-name">George Forsyth</div>
+<div class="percentage">5%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">33%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">1%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Senadores - Maynas</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="María Perez" src="images/juancarlosaguila.jpg"/>
+</div>
+<div class="candidate-name">Juan Carlos del Aguila</div>
+<div class="percentage">15%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Julio Vega" src="images/jorge%20morante.jpg"/>
+</div>
+<div class="candidate-name">Jorge Morante</div>
+<div class="percentage">13%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Carmen Rojas" src="images/jorgefonquinos.jpg"/>
+</div>
+<div class="candidate-name">Jorge fonquinos</div>
+<div class="percentage">12%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Roberto Quispe" src="images/juansalda%C3%B1a.jpg"/>
+</div>
+<div class="candidate-name">Juan Saldaña</div>
+<div class="percentage">11%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Laura Mendoza" src="images/jhonrivas.jpg"/>
+</div>
+<div class="candidate-name">Jhon Rivas</div>
+<div class="percentage">7%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Augusto vargas" src="images/aufustovargas.jpg"/>
+</div>
+<div class="candidate-name">Augusto vargas</div>
+<div class="percentage">6%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">35%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">1%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Diputados - Maynas</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Carlos Paredes" src="images/jaimemarin.jpg"/>
+</div>
+<div class="candidate-name">Jaime Marín</div>
+<div class="percentage">13%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Sandra Flores" src="images/georgemera.jpg"/>
+</div>
+<div class="candidate-name">George Mera</div>
+<div class="percentage">11%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Miguel Castro" src="images/almendrayarame.jpg"/>
+</div>
+<div class="candidate-name">Almendra yaramé</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Teresa Rivas" src="images/cesarvidaurre.jpg"/>
+</div>
+<div class="candidate-name">Cesar Vidaurre</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Pedro Suárez" src="images/franciscolopez.jpg"/>
+</div>
+<div class="candidate-name">Francisco López</div>
+<div class="percentage">9%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Pedro Suárez" src="images/frankvalderrama.jpg"/>
+</div>
+<div class="candidate-name">Frank Valderrama</div>
+<div class="percentage">8%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">37%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">2%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Gobierno Regional - Maynas</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/olmexescalante.jpg"/>
+</div>
+<div class="candidate-name">Olmex Escalante</div>
+<div class="percentage">18%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/fernandomelendez.jpg"/>
+</div>
+<div class="candidate-name">Fernando Meléndez</div>
+<div class="percentage">12%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/jorgemera.jpg"/>
+</div>
+<div class="candidate-name">Jorge Mera</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/belvisaldana.jpg"/>
+</div>
+<div class="candidate-name">Belvi Saldaña</div>
+<div class="percentage">10%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/wilfredomalpartida.jpg"/>
+</div>
+<div class="candidate-name">wilfredo Malpartida</div>
+<div class="percentage">7%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/juanbaldeon.jpg"/>
+</div>
+<div class="candidate-name">Juan Baldeon</div>
+<div class="percentage">6%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/teddyvasquez.jpg"/>
+</div>
+<div class="candidate-name">Teddy Vasquez</div>
+<div class="percentage">1%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">31%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">5%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Alcaldía - Maynas</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luis Valdivia" src="images/rogergronerth.jpg"/>
+</div>
+<div class="candidate-name">Roger Gronerth</div>
+<div class="percentage">21%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ana Chávez" src="images/borismorey.jpg"/>
+</div>
+<div class="candidate-name">Boris Morey</div>
+<div class="percentage">16%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ricardo Palma" src="images/jorlparimango.jpg"/>
+</div>
+<div class="candidate-name">Joel Parimango</div>
+<div class="percentage">12%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/tonymori.jpg"/>
+</div>
+<div class="candidate-name">Tony Mori</div>
+<div class="percentage">9%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/richardvasquez.jpg"/>
+</div>
+<div class="candidate-name">Richard Vasquez</div>
+<div class="percentage">5%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/juvenalrodriguez.jpg"/>
+</div>
+<div class="candidate-name">Juvenal Rodriguez</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">28%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">7%</div>
+</div>
+</div>
+</section>
+    
+   <section class="poll-section">
+<h2>Candidatos Alcaldía - San Juan Bautista</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luis Valdivia" src="images/victorgonzales.jpg"/>
+</div>
+<div class="candidate-name">Victor Gonzales</div>
+<div class="percentage">29%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ana Chávez" src="images/franciscosanjurjo.jpg"/>
+</div>
+<div class="candidate-name">Francisco Sanjurjo</div>
+<div class="percentage">18%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ricardo Palma" src="images/fabioalvarez.jpg"/>
+</div>
+<div class="candidate-name">Fabio Alvarez</div>
+<div class="percentage">16%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/maxguerrero.jpg"/>
+</div>
+<div class="candidate-name">Max Guerrero</div>
+<div class="percentage">4%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/juliomesa.jpg"/>
+</div>
+<div class="candidate-name">Julio Mesía</div>
+<div class="percentage">3%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">28%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">2%</div>
+</div>
+</div>
+</section>
+    
+    
+    <section class="poll-section">
+<h2>Candidatos Alcaldía - Punchana</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luis Valdivia" src="images/jairobicerra.jpg"/>
+</div>
+<div class="candidate-name">Jairo Bicerra</div>
+<div class="percentage">28%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ana Chávez" src="images/alberguerra.jpg"/>
+</div>
+<div class="candidate-name">Alber Guerra</div>
+<div class="percentage">17%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ricardo Palma" src="images/rolinmeza.jpg"/>
+</div>
+<div class="candidate-name">Rolin Meza</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/duncandonayre.jpg"/>
+</div>
+<div class="candidate-name">Duncan Donayre</div>
+<div class="percentage">7%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/sadithdavila.jpg"/>
+</div>
+<div class="candidate-name">Sadith Davila</div>
+<div class="percentage">6%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/joaquinpardave.jpg"/>
+</div>
+<div class="candidate-name">Joaquin Pardave</div>
+<div class="percentage">5%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">26%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">1%</div>
+</div>
+</div>
+</section>
+    
+    
+    
+    <section class="poll-section">
+<h2>Candidatos Alcaldía - Belén</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luis Valdivia" src="images/maxvela.jpg"/>
+</div>
+<div class="candidate-name">Max Vela</div>
+<div class="percentage">25%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ana Chávez" src="images/paulinoreategui.jpg"/>
+</div>
+<div class="candidate-name">Paulinho Reategui</div>
+<div class="percentage">23%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Ricardo Palma" src="images/rogervasquez.jpg"/>
+</div>
+<div class="candidate-name">Roger Vasquez</div>
+<div class="percentage">21%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/tonyisuiza.jpg"/>
+</div>
+<div class="candidate-name">Tony Isuiza</div>
+<div class="percentage">15%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Gloria Medina" src="images/christiancavero.jpg"/>
+</div>
+<div class="candidate-name">Christian Cavero</div>
+<div class="percentage">3%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">11%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">2%</div>
+</div>
+</div>
+</section>
+    
+    
+    
+    
+</div>
+<!-- ALTO AMAZONAS -->
+<div class="province-data" id="alto-amazonas-data">
+<section class="poll-section">
+<h2>Candidatos Presidente de la República </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Hernando de Soto" src="images/hernando.png"/>
+</div>
+<div class="candidate-name">Hernando de Soto</div>
+<div class="percentage">15%</div>
+</div>
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Antauro Humala" src="images/antauro.png"/>
+</div>
+<div class="candidate-name">Antauro Humala</div>
+<div class="percentage">15%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Keiko Fujimori" src="images/keyko.png"/>
+</div>
+<div class="candidate-name">Keiko Fujimori</div>
+<div class="percentage">8%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="César Acuña" src="images/cesar1.png"/>
+</div>
+<div class="candidate-name">César Acuña</div>
+<div class="percentage">11%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="George Forsyth" src="images/george.png"/>
+</div>
+<div class="candidate-name">George Forsyth</div>
+<div class="percentage">4%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rafael Lopez A." src="images/rafael.png"/>
+</div>
+<div class="candidate-name">Rafael Lopez A.</div>
+<div class="percentage">3%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">26%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">18%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Senadores </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Alberto Sánchez" src="images/juancarlosaguila.jpg"/>
+</div>
+<div class="candidate-name">Juan Carlos del Aguila</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Mercedes Ríos" src="images/jorge%20morante.jpg"/>
+</div>
+<div class="candidate-name">Jorge Morante</div>
+<div class="percentage">9%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Víctor Huamán" src="images/jhonrivas.jpg"/>
+</div>
+<div class="candidate-name">Jhon Rivas</div>
+<div class="percentage">9%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/yoshilam.jpg"/>
+</div>
+<div class="candidate-name">Yoshi Lam</div>
+<div class="percentage">8%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/rosiotorres.jpg"/>
+</div>
+<div class="candidate-name">Rosio Torres</div>
+<div class="percentage">7%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/jorgefonquinos.jpg"/>
+</div>
+<div class="candidate-name">Jorge Fonquinos</div>
+<div class="percentage">7%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">45%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">5%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Diputados </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Javier Morales" src="images/anazegarra.jpg"/>
+</div>
+<div class="candidate-name">Ana Zegarra</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Claudia Vargas" src="images/franciscolopez.jpg"/>
+</div>
+<div class="candidate-name">Francisco Lopez</div>
+<div class="percentage">9%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Diego Pariona" src="images/jaimemarin.jpg"/>
+</div>
+<div class="candidate-name">Jaime Marín</div>
+<div class="percentage">9%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/frankvalderrama.jpg"/>
+</div>
+<div class="candidate-name">Frank Valderrama</div>
+<div class="percentage">8%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/georgemera.jpg"/>
+</div>
+<div class="candidate-name">George Mera</div>
+<div class="percentage">7%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/cesarvidaurre.jpg"/>
+</div>
+<div class="candidate-name">Cesar Vidaurre</div>
+<div class="percentage">7%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">41%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">9%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Gobierno Regional</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/olmexescalante.jpg"/>
+</div>
+<div class="candidate-name">Olmex Escalante</div>
+<div class="percentage">9%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/fernandomelendez.jpg"/>
+</div>
+<div class="candidate-name">Fernando Meléndez</div>
+<div class="percentage">19%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/jorgemera.jpg"/>
+</div>
+<div class="candidate-name">Jorge Mera</div>
+<div class="percentage">16%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/belvisaldana.jpg"/>
+</div>
+<div class="candidate-name">Belvi Saldaña</div>
+<div class="percentage">12%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/wilfredomalpartida.jpg"/>
+</div>
+<div class="candidate-name">wilfredo Malpartida</div>
+<div class="percentage">8%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/juanbaldeon.jpg"/>
+</div>
+<div class="candidate-name">Juan Baldeon</div>
+<div class="percentage">7%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/teddyvasquez.jpg"/>
+</div>
+<div class="candidate-name">Teddy Vasquez</div>
+<div class="percentage">4%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">20%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">5%</div>
+</div>
+</div> 
+</section>
+
+<section class="poll-section">
+<h2>Candidatos Alcalde - Alto Amazonas</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/hugoaraujo.jpg"/>
+</div>
+<div class="candidate-name">Hugo Araujo</div>
+<div class="percentage">19%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/leonardoinga.jpg"/>
+</div>
+<div class="candidate-name">Leonardo Inga</div>
+<div class="percentage">13%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/jhonyescudero.jpg"/>
+</div>
+<div class="candidate-name">Jhony Escudero</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/juanmesias.jpg"/>
+</div>
+<div class="candidate-name">Juan Mesias</div>
+<div class="percentage">10%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/edgardoaspajo.jpg"/>
+</div>
+<div class="candidate-name">Edgardo Aspajo</div>
+<div class="percentage">10%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/abdielarevalo.jpg"/>
+</div>
+<div class="candidate-name">Abdiel Arévalo</div>
+<div class="percentage">9%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/allenalva.jpg"/>
+</div>
+<div class="candidate-name">Allen Alva</div>
+<div class="percentage">7%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">19%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">3%</div>
+</div>
+</div>
+    
+    
+    
+    
+</section>
+
+
+</div>
+<!-- REQUENA -->
+<div class="province-data" id="requena-data">
+<section class="poll-section">
+<h2>Candidatos Presidente de la República </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Hernando de Soto" src="images/carlosa.png"/>
+</div>
+<div class="candidate-name">Carlos Alvarez</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Antauro Humala" src="images/antauro.png"/>
+</div>
+<div class="candidate-name">Antauro Humala</div>
+<div class="percentage">5%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Keiko Fujimori" src="images/keyko.png"/>
+</div>
+<div class="candidate-name">Keiko Fujimori</div>
+<div class="percentage">11%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="César Acuña" src="images/cesar1.png"/>
+</div>
+<div class="candidate-name">César Acuña</div>
+<div class="percentage">1%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="George Forsyth" src="images/george.png"/>
+</div>
+<div class="candidate-name">George Forsyth</div>
+<div class="percentage">4%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rafael Lopez A." src="images/rafael.png"/>
+</div>
+<div class="candidate-name">Rafael Lopez A.</div>
+<div class="percentage">1%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">69%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">7%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Senadores </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Mercedes Ríos" src="images/jorge%20morante.jpg"/>
+</div>
+<div class="candidate-name">Jorge Morante</div>
+<div class="percentage">2%</div>
+</div>
+        
+      <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/rosiotorres.jpg"/>
+</div>
+<div class="candidate-name">Rosio Torres</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Alberto Sánchez" src="images/juancarlosaguila.jpg"/>
+</div>
+<div class="candidate-name">Juan Carlos del Aguila</div>
+<div class="percentage">2%</div>
+</div>
+
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Víctor Huamán" src="images/juansalda%C3%B1a.jpg"/>
+</div>
+<div class="candidate-name">Juan Saldaña</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/yoshilam.jpg"/>
+</div>
+<div class="candidate-name">Yoshi Lam</div>
+<div class="percentage">1%</div>
+</div>
+    
+ 
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/jorgefonquinos.jpg"/>
+</div>
+<div class="candidate-name">Jorge Fonquinos</div>
+<div class="percentage">1%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">81%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">9%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Diputados </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+
+ <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/georgemera.jpg"/>
+</div>
+<div class="candidate-name">George Mera</div>
+<div class="percentage">3%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Diego Pariona" src="images/jaimemarin.jpg"/>
+</div>
+<div class="candidate-name">Jaime Marín</div>
+<div class="percentage">3%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/frankvalderrama.jpg"/>
+</div>
+<div class="candidate-name">Frank Valderrama</div>
+<div class="percentage">1%</div>
+</div>
+    
+   
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/cesarvidaurre.jpg"/>
+</div>
+<div class="candidate-name">Cesar Vidaurre</div>
+<div class="percentage">1%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">82%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Javier Morales" src="images/almendrayarame.jpg"/>
+</div>
+<div class="candidate-name">Almendra Yaramé</div>
+<div class="percentage">1%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">9%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Gobierno Regional </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/olmexescalante.jpg"/>
+</div>
+<div class="candidate-name">Olmex Escalante</div>
+<div class="percentage">2%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/fernandomelendez.jpg"/>
+</div>
+<div class="candidate-name">Fernando Meléndez</div>
+<div class="percentage">6%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/jorgemera.jpg"/>
+</div>
+<div class="candidate-name">Jorge Mera</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/belvisaldana.jpg"/>
+</div>
+<div class="candidate-name">Belvi Saldaña</div>
+<div class="percentage">5%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/wilfredomalpartida.jpg"/>
+</div>
+<div class="candidate-name">wilfredo Malpartida</div>
+<div class="percentage">2%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/juanbaldeon.jpg"/>
+</div>
+<div class="candidate-name">Juan Baldeon</div>
+<div class="percentage">3%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/teddyvasquez.jpg"/>
+</div>
+<div class="candidate-name">Teddy Vasquez</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">60%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">10%</div>
+</div>
+</div> 
+</section>
+
+<section class="poll-section">
+<h2>Candidatos Alcalde - Requena</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/juancarlosrengifo.jpg"/>
+</div>
+<div class="candidate-name">Juan Carlos Rengifo</div>
+<div class="percentage">16%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/javiervillacorta.jpg"/>
+</div>
+<div class="candidate-name">Javier Villacorta</div>
+<div class="percentage">4%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/adolfoampuero.jpg"/>
+</div>
+<div class="candidate-name">Adolfo Ampuero</div>
+<div class="percentage">2%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/cardenonunez.jpg"/>
+</div>
+<div class="candidate-name">Cardeño Nuñez</div>
+<div class="percentage">1%</div>
+</div>
+    
+ 
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">69%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">8%</div>
+</div>
+</div>
+</section>
+</div>
+<!-- LORETO -->
+<div class="province-data" id="loreto-data">
+<section class="poll-section">
+
+<h2>Candidatos Presidente de la República </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Hernando de Soto" src="images/hernando.png"/>
+</div>
+<div class="candidate-name">Hernando de Soto</div>
+<div class="percentage">9%</div>
+</div>
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Antauro Humala" src="images/antauro.png"/>
+</div>
+<div class="candidate-name">Antauro Humala</div>
+<div class="percentage">18%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Keiko Fujimori" src="images/keyko.png"/>
+</div>
+<div class="candidate-name">Keiko Fujimori</div>
+<div class="percentage">14%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="César Acuña" src="images/cesar1.png"/>
+</div>
+<div class="candidate-name">César Acuña</div>
+<div class="percentage">8%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="George Forsyth" src="images/george.png"/>
+</div>
+<div class="candidate-name">George Forsyth</div>
+<div class="percentage">4%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rafael Lopez A." src="images/rafael.png"/>
+</div>
+<div class="candidate-name">Rafael Lopez A.</div>
+<div class="percentage">4%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">33%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">10%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Senadores </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Alberto Sánchez" src="images/aufustovargas.jpg"/>
+</div>
+<div class="candidate-name">Augusto Vargas</div>
+<div class="percentage">3%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Mercedes Ríos" src="images/jorge%20morante.jpg"/>
+</div>
+<div class="candidate-name">Jorge Morante</div>
+<div class="percentage">7%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Víctor Huamán" src="images/jhonrivas.jpg"/>
+</div>
+<div class="candidate-name">Jhon Rivas</div>
+<div class="percentage">11%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/juansalda%C3%B1a.jpg"/>
+</div>
+<div class="candidate-name">Juan Saldaña</div>
+<div class="percentage">7%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/rosiotorres.jpg"/>
+</div>
+<div class="candidate-name">Rosio Torres</div>
+<div class="percentage">4%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/jorgefonquinos.jpg"/>
+</div>
+<div class="candidate-name">Jorge Fonquinos</div>
+<div class="percentage">3%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">46%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">19%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Diputados </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Javier Morales" src="images/almendrayarame.jpg"/>
+</div>
+<div class="candidate-name">Almendra Yaramé</div>
+<div class="percentage">4%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Claudia Vargas" src="images/franciscolopez.jpg"/>
+</div>
+<div class="candidate-name">Francisco Lopez</div>
+<div class="percentage">2%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Diego Pariona" src="images/jaimemarin.jpg"/>
+</div>
+<div class="candidate-name">Jaime Marín</div>
+<div class="percentage">8%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/frankvalderrama.jpg"/>
+</div>
+<div class="candidate-name">Frank Valderrama</div>
+<div class="percentage">12%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/georgemera.jpg"/>
+</div>
+<div class="candidate-name">George Mera</div>
+<div class="percentage">15%</div>
+</div>
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/cesarvidaurre.jpg"/>
+</div>
+<div class="candidate-name">Cesar Vidaurre</div>
+<div class="percentage">6%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">49%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">4%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Gobierno Regional </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/olmexescalante.jpg"/>
+</div>
+<div class="candidate-name">Olmex Escalante</div>
+<div class="percentage">6%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/fernandomelendez.jpg"/>
+</div>
+<div class="candidate-name">Fernando Meléndez</div>
+<div class="percentage">13%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/jorgemera.jpg"/>
+</div>
+<div class="candidate-name">Jorge Mera</div>
+<div class="percentage">20%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/belvisaldana.jpg"/>
+</div>
+<div class="candidate-name">Belvi Saldaña</div>
+<div class="percentage">10%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/wilfredomalpartida.jpg"/>
+</div>
+<div class="candidate-name">wilfredo Malpartida</div>
+<div class="percentage">5%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/juanbaldeon.jpg"/>
+</div>
+<div class="candidate-name">Juan Baldeon</div>
+<div class="percentage">2%</div>
+</div>
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/teddyvasquez.jpg"/>
+</div>
+<div class="candidate-name">Teddy Vasquez</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">33%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">9%</div>
+</div>
+</div> 
+</section>
+
+<section class="poll-section">
+<h2>Candidatos Alcalde - Loreto</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/alexmondragon.jpg"/>
+</div>
+<div class="candidate-name">Alex Mondragon</div>
+<div class="percentage">32%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/drawingrandez.jpg"/>
+</div>
+<div class="candidate-name">Darwin Grandez</div>
+<div class="percentage">14%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/guidocoronel.jpg"/>
+</div>
+<div class="candidate-name">Guido Coronel</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/luismacedo.jpg"/>
+</div>
+<div class="candidate-name">Luis Macedo</div>
+<div class="percentage">4%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/luismarin.jpg"/>
+</div>
+<div class="candidate-name">Luis Marín</div>
+<div class="percentage">3%</div>
+</div>
+
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">31%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">6%</div>
+</div>
+</div>
+</section>
+</div>
+<!-- MARISCAL RAMÓN CASTILLA -->
+<div class="province-data" id="mariscal-ramon-castilla-data">
+<section class="poll-section">
+<h2>Candidatos Presidente de la República </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+    
+    
+    
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Antauro Humala" src="images/antauro.png"/>
+</div>
+<div class="candidate-name">Antauro Humala</div>
+<div class="percentage">10%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Keiko Fujimori" src="images/keyko.png"/>
+</div>
+<div class="candidate-name">Keiko Fujimori</div>
+<div class="percentage">31%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="César Acuña" src="images/cesar1.png"/>
+</div>
+<div class="candidate-name">César Acuña</div>
+<div class="percentage">5%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rafael Lopez A." src="images/rafael.png"/>
+</div>
+<div class="candidate-name">Rafael Lopez A.</div>
+<div class="percentage">1%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">40%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">13%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Senadores </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Alberto Sánchez" src="images/juancarlosaguila.jpg"/>
+</div>
+<div class="candidate-name">Juan Carlos del Aguila</div>
+<div class="percentage">1%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Mercedes Ríos" src="images/jorge%20morante.jpg"/>
+</div>
+<div class="candidate-name">Jorge Morante</div>
+<div class="percentage">3%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Víctor Huamán" src="images/jhonrivas.jpg"/>
+</div>
+<div class="candidate-name">Jhon Rivas</div>
+<div class="percentage">1%</div>
+</div>
+    
+      
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/juansalda%C3%B1a.jpg"/>
+</div>
+<div class="candidate-name">Juan Saldaña</div>
+<div class="percentage">2%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Luisa Ortega" src="images/yoshilam.jpg"/>
+</div>
+<div class="candidate-name">Yoshi Lam</div>
+<div class="percentage">2%</div>
+</div>
+    
+    
+  
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">90%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">1%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Diputados </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Javier Morales" src="images/almendrayarame.jpg"/>
+</div>
+<div class="candidate-name">Almendra yaramé</div>
+<div class="percentage">3%</div>
+</div>
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Diego Pariona" src="images/jaimemarin.jpg"/>
+</div>
+<div class="candidate-name">Jaime Marín</div>
+<div class="percentage">4%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/frankvalderrama.jpg"/>
+</div>
+<div class="candidate-name">Frank Valderrama</div>
+<div class="percentage">3%</div>
+</div>
+ 
+    
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Daniela Hinostroza" src="images/cesarvidaurre.jpg"/>
+</div>
+<div class="candidate-name">Cesar Vidaurre</div>
+<div class="percentage">5%</div>
+</div>
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.jpg"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">84%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">1%</div>
+</div>
+</div>
+</section>
+<section class="poll-section">
+<h2>Candidatos Gobierno Regional </h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+
+
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/fernandomelendez.jpg"/>
+</div>
+<div class="candidate-name">Fernando Meléndez</div>
+<div class="percentage">6%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/jorgemera.jpg"/>
+</div>
+<div class="candidate-name">Jorge Mera</div>
+<div class="percentage">11%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/belvisaldana.jpg"/>
+</div>
+<div class="candidate-name">Belvi Saldaña</div>
+<div class="percentage">9%</div>
+</div>
+    
+    <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/wilfredomalpartida.jpg"/>
+</div>
+<div class="candidate-name">wilfredo Malpartida</div>
+<div class="percentage">3%</div>
+</div>
+    
+   
+    
+       <div class="candidate-card">
+<div class="candidate-img">
+<img alt="Rosa Torres" src="images/teddyvasquez.jpg"/>
+</div>
+<div class="candidate-name">Teddy Vasquez</div>
+<div class="percentage">1%</div>
+</div>
+    
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">69%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">1%</div>
+</div>
+</div> 
+</section>
+
+<section class="poll-section">
+<h2>Candidatos Alcalde - Mariscal Ramón Castilla</h2>
+<div class="scroll-indicator">Desliza para ver más candidatos →</div>
+<div class="candidates-container">
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Eduardo Díaz" src="images/juanlao.jpg"/>
+</div>
+<div class="candidate-name">Juan Lao</div>
+<div class="percentage">36%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Patricia Herrera" src="images/davidquispe.jpg"/>
+</div>
+<div class="candidate-name">David Quispe</div>
+<div class="percentage">25%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Juan Mamani" src="images/edwintorres.jpg"/>
+</div>
+<div class="candidate-name">Edwin Torres</div>
+<div class="percentage">4%</div>
+</div>
+
+    
+  
+    
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="No sabe/No opina" src="images/nosabe.png"/>
+</div>
+<div class="candidate-name">No sabe/No opina</div>
+<div class="percentage">30%</div>
+</div>
+<div class="candidate-card">
+<div class="candidate-img">
+<img alt="Otros" src="images/otros.jpg"/>
+</div>
+<div class="candidate-name">Otros</div>
+<div class="percentage">5%</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const select = document.getElementById('province-select');
+  const provinceDataDivs = document.querySelectorAll('.province-data');
+
+  // Mostrar solo la provincia seleccionada
+  select.addEventListener('change', () => {
+    const selected = select.value;
+    provinceDataDivs.forEach(div => {
+      div.classList.toggle('active', div.id === `${selected}-data`);
+    });
+  });
+
+  // Ordenar candidatos por porcentaje, dejando "No sabe/No opina" y "Otros" al final
+  document.querySelectorAll('.candidates-container').forEach(container => {
+    const cards = Array.from(container.querySelectorAll('.candidate-card'));
+
+    const fixed = cards.filter(card => {
+      const name = card.querySelector('.candidate-name').textContent.trim().toLowerCase();
+      return name.includes('no sabe') || name.includes('otros');
+    });
+
+    const sortable = cards.filter(card => !fixed.includes(card));
+
+    sortable.sort((a, b) => {
+      const getPercent = el => parseFloat(el.querySelector('.percentage').textContent.replace('%','')) || 0;
+      return getPercent(b) - getPercent(a);
+    });
+
+    const ordered = [...sortable, ...fixed];
+
+    ordered.forEach((card, index) => {
+      const color = index % 2 === 0 ? '#f44336' : '#2196f3';
+      card.querySelector('.percentage').style.backgroundColor = color;
+      container.appendChild(card);
+    });
+  });
+});
+</script>
+</body>
+</html>
