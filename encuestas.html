@@ -156,869 +156,138 @@
     <!-- end header section -->
  
     
-    <head>
- 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDR Consultores - Evaluación de Gestión</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f5f5f5;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            height: 40px;
-        }
-
-        .hamburger {
-            display: none;
-        }
-
-        .title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .legend {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .legend-color {
-            width: 16px;
-            height: 16px;
-        }
-
-        .evaluation-list {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .evaluation-item {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .person-info {
-            min-width: 200px;
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .person-image {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .person-details {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .person-name {
-            font-weight: bold;
-        }
-
-        .person-position {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .bar-container {
-            flex-grow: 1;
-            height: 32px;
-            display: flex;
-            overflow: hidden;
-            border-radius: 4px;
-        }
-
-        .bar {
-            height: 100%;
-            transition: width 0.3s ease;
-        }
-
-        .bar-approved { background-color: #2196F3; }
-        .bar-disapproved { background-color: #F44336; }
-        .bar-noopinion { background-color: #FF9800; }
-
-        @media (max-width: 768px) {
-            .evaluation-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .bar-container {
-                width: 100%;
-            }
-
-            .hamburger {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .hamburger div {
-                
-                background-color: #F44336;
-            }
-        }
-    </style>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Evaluación de Gestión</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        
-        .container-evaluacion {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .rango-fechas {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        
-        .leyenda {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-        }
-        
-        .leyenda-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .leyenda-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
-        }
-        
-        .color-azul {
-            background-color: #2196F3;
-        }
-        
-        .color-rojo {
-            background-color: #F44336;
-        }
-        
-        .color-naranja {
-            background-color: #9b9b9b;
-        }
-        
-        .selector-provincia {
-            margin-bottom: 30px;
-        }
-        
-        .selector-provincia label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        
-        .selector-provincia select {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        
-        .resultados {
-            margin-top: 20px;
-        }
-        
-        .candidato {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 30px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .info-candidato {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .foto-candidato {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #f0f0f0;
-        }
-        
-        .detalles-candidato {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .nombre-candidato {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-        
-        .region-candidato {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .barra-progreso {
-            height: 30px;
-            display: flex;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .segmento-progreso {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .oculto {
-            display: none;
-        }
-        
-        /* Media queries para responsividad */
-        @media (min-width: 768px) {
-            .candidato {
-                flex-direction: row;
-                align-items: center;
-            }
-            
-            .info-candidato {
-                width: 200px;
-                margin-bottom: 0;
-                margin-right: 15px;
-            }
-            
-            .barra-progreso {
-                flex-grow: 1;
-            }
-        }
-        
-        @media (max-width: 767px) {
-            .leyenda {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            h1 {
-                font-size: 22px;
-            }
-            
-            .barra-progreso {
-                margin-top: 10px;
-            }
-            
-            .foto-candidato {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .info-candidato {
-                justify-content: center;
-            }
-            
-            .container-evaluacion {
-                padding: 15px;
-            }
-            
-            .segmento-progreso {
-                font-size: 14px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 20px;
-            }
-            
-            .rango-fechas {
-                font-size: 16px;
-                text-align: center;
-            }
-            
-            .leyenda-item {
-                margin-bottom: 5px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container-evaluacion">
-        <h1>REGISTRO DE EVALUACIÓN DE GESTIÓN</h1>
-        
-        <div class="rango-fechas">
-            <h4> Del 18 al 30 de marzo del 2025 </h4>
-        </div>
-        
-    
-        <div class="selector-provincia">
-            <label for="provincia">Seleccionar Provincia:</label>
-            <select id="provincia" onchange="showProvinceData()">
-                <option value="maynas">Maynas</option>
-                <option value="alto_amazonas">Alto Amazonas</option>
-                <option value="requena">Requena</option>
-                <option value="loreto">Loreto</option>
-                <option value="mcr">Mariscal Ramón Castilla</option>
-            </select>
-        </div>
-        
-        <div class="resultados">
-            <div class="leyenda">
-                <div class="leyenda-item">
-                    <div class="leyenda-color color-azul"></div>
-                    <span>Aprobado</span>
-                </div>
-                <div class="leyenda-item">
-                    <div class="leyenda-color color-rojo"></div>
-                    <span>Desaprobado</span>
-                </div>
-                <div class="leyenda-item">
-                    <div class="leyenda-color color-naranja"></div>
-                    <span>No sabe/no opina</span>
-                </div>
-            </div>
-            
-            <!-- Maynas Data -->
-            <div id="maynas" class="province-data">
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/rene.png" alt="René Chavez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">René Chavez</div>
-                            <div class="region-candidato">Gobierno Regional</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 52%;">52%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 22%;">22%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 26%;">26%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/vladimir.png" alt="Vladimir Chong" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Vladimir Chong</div>
-                            <div class="region-candidato">Maynas</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 23%;">23%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 47%;">47%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 30%;">30%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/joel.png" alt="Joel Parimango" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Joel Parimango</div>
-                            <div class="region-candidato">San Juan Bautista</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 30%;">30%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 34%;">34%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 36%;">36%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/olmex.png" alt="Olmex Escalante" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Olmex Escalante</div>
-                            <div class="region-candidato">Punchana</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 33%;">33%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 26%;">26%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 41%;">41%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/cesar.png" alt="Cesar Vidaurre" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Cesar Vidaurre</div>
-                            <div class="region-candidato">Belén</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 32%;">32%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 29%;">29%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 39%;">39%</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Alto Amazonas Data -->
-            <div id="alto_amazonas" class="province-data oculto">
-              <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/rene.png" alt="René Chavez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">René Chavez</div>
-                            <div class="region-candidato">Gobierno Regional</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 49%;">49%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 22%;">22%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 29%;">29%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/roy.jpg" alt="Luis Vásquez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Roy Saldaña</div>
-                            <div class="region-candidato">Alto Amazonas</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 44%;">44%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 23%;">23%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 33%;">33%</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Requena Data -->
-            <div id="requena" class="province-data oculto">
-                 <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/rene.png" alt="René Chavez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">René Chavez</div>
-                            <div class="region-candidato">Gobierno Regional</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 49%;">49%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 29%;">29%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 22%;">22%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/noe.jpg" alt="Luis Vásquez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Noe Caballero</div>
-                            <div class="region-candidato">Requena</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 47%;">47%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 25%;">25%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 28%;">28%</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Loreto Data -->
-            <div id="loreto" class="province-data oculto">
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/rene.png" alt="René Chavez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">René Chavez</div>
-                            <div class="region-candidato">Gobierno Regional</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 51%;">51%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 27%;">27%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 22%;">22%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/daniel.jpg" alt="Luis Vásquez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Daniel Saboya</div>
-                            <div class="region-candidato">Loreto</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                   <div class="segmento-progreso color-azul" style="width: 36%;">36%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 43%;">43%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 21%;">21%</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Mariscal Ramón Castilla Data -->
-            <!-- <div id="mcr" class="province-data oculto">
-              <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="images/rene.png" alt="René Chavez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">René Chavez</div>
-                            <div class="region-candidato">Gobierno Regional</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 52%;">52%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 22%;">22%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 26%;">26%</div>
-                    </div>
-                </div>
-                
-                <div class="candidato">
-                    <div class="info-candidato">
-                        <img src="/api/placeholder/80/80" alt="Luis Vásquez" class="foto-candidato">
-                        <div class="detalles-candidato">
-                            <div class="nombre-candidato">Luis Vásquez</div>
-                            <div class="region-candidato">Yurimaguas</div>
-                        </div>
-                    </div>
-                    <div class="barra-progreso">
-                        <div class="segmento-progreso color-azul" style="width: 42%;">42%</div>
-                        <div class="segmento-progreso color-rojo" style="width: 38%;">38%</div>
-                        <div class="segmento-progreso color-naranja" style="width: 20%;">20%</div> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        function showProvinceData() {
-            const selectedProvince = document.getElementById('provincia').value;
-            
-            // Hide all province data
-            const provinceData = document.querySelectorAll('.province-data');
-            provinceData.forEach(data => {
-                data.classList.add('oculto');
-            });
-            
-            // Show selected province data
-            document.getElementById(selectedProvince).classList.remove('oculto');
-        }
-    </script>
-</body>
     
     
+    <!-- BOTONES-->
     <br>
-      <br>
-    
-    
-    
-<style>
-/* Agregar estos estilos al bloque style existente */
-.vote-intention {
-    margin-top: 40px;
-    padding: 20px 0;
-    background: #f8f9fa;
-}
-
-.vote-intention h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.vote-intention h3 {
-    text-align: left;
-    font-size: 20px;
-    margin-bottom: 20px;
-}
-
-.carousel-container {
-    position: relative;
-    padding: 0 40px;
-}
-
-.carousel {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    gap: 15px;
-    padding: 10px 0;
-}
-
-.carousel::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-
-.candidate-card {
-    min-width: 120px;
-    flex: 0 0 auto;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.candidate-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    object-fit: cover;
-}
-
-.candidate-name {
-    font-size: 14px;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.candidate-percentage {
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    margin-top: 5px;
-    display: inline-block;
-}
-
-.scroll-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
-    border: 1px solid #ddd;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 1;
-}
-
-.scroll-button.left {
-    left: 5px;
-}
-
-.scroll-button.right {
-    right: 5px;
-}
-
-.scroll-button:hover {
-    background: #f5f5f5;
-}
-</style>
-
-<div class="vote-intention">
-    <h2>INTENCIÓN DE VOTO 2026</h2>
-    <h3>PRESIDENCIA DE LA REPÚBLICA</h3>
-   <br>
-<p> Del 03 al 14 de febrero del 2025 </p>. 
-      <br>
-    
-    <div class="carousel-container">
-        <button class="scroll-button left" onclick="scroll(-200)">←</button>
-        <button class="scroll-button right" onclick="scroll(200)">→</button>
-        
-        <div class="carousel" id="candidateCarousel">
-            <div class="candidate-card">
-                <img src="images/keyko.png" alt="Keiko Fujimori" class="candidate-image">
-                <div class="candidate-name">Keiko Fujimori</div>
-                <div class="candidate-percentage" style="background-color: #9c27b0;">13%</div>
-            </div>
-            <div class="candidate-card">
-                <img src="images/antauro.png" alt="Antauro Humala" class="candidate-image">
-                <div class="candidate-name">Antauro Humala</div>
-                <div class="candidate-percentage" style="background-color: #f44336;">10%</div>
-            </div>
-
-             <div class="candidate-card">
-                <img src="images/cesar1.png" alt="César Acuña" class="candidate-image">
-                <div class="candidate-name">César Acuña</div>
-                <div class="candidate-percentage" style="background-color: #2196f3;">10%</div>
-            </div>
- <div class="candidate-card">
-                <img src="images/hernando.png" alt="Hernando de Soto" class="candidate-image">
-                <div class="candidate-name">Hernando de Soto</div>
-                <div class="candidate-percentage" style="background-color: #4caf50;">9%</div>
-            </div>
-          
-            <div class="candidate-card">
-                <img src="images/rafael.png" alt="Rafael Lopez A." class="candidate-image">
-                <div class="candidate-name">Rafael Lopez A.</div>
-                <div class="candidate-percentage" style="background-color: #ff9800;">8%</div>
-            </div>
-               <div class="candidate-card">
-                <img src="images/george.png" alt="George Forsyht" class="candidate-image">
-                <div class="candidate-name">George Forsyht</div>
-                <div class="candidate-percentage" style="background-color: #f44336;">8%</div>
-            </div>
-         
-            
-        
-            <div class="candidate-card">
-                <img src="images/carlos.png" alt="Carlos Neuhaus" class="candidate-image">
-                <div class="candidate-name">Carlos Neuhaus</div>
-                <div class="candidate-percentage" style="background-color: #ff9800;">8%</div>
-            </div>
-
-
-          <div class="candidate-card">
-                <img src="images/carlosa.png" alt="Carlos Alvarez" class="candidate-image">
-                <div class="candidate-name">Carlos Alvarez</div>
-                <div class="candidate-percentage" style="background-color: #9c27b0;">7%</div>
-            </div>
-          
-            <div class="candidate-card">
-                <img src="images/roque.png" alt="Roque Benavides" class="candidate-image">
-                <div class="candidate-name">Roque Benavides</div>
-                <div class="candidate-percentage" style="background-color: #4caf50;">7%</div>
-            </div>
-            <div class="candidate-card">
-                <img src="images/nosabe.png" alt="No sabe" class="candidate-image">
-                <div class="candidate-name">No sabe</div>
-                <div class="candidate-percentage" style="background-color: #2196f3;">17%</div>
-            </div>
-            <div class="candidate-card">
-                <img src="images/otros.png" alt="Otros" class="candidate-image">
-                <div class="candidate-name">Otros</div>
-                <div class="candidate-percentage" style="background-color: #9c27b0;">3%</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-// Agregar estas funciones al bloque script existente
-
-function scroll(offset) {
-    const carousel = document.getElementById('candidateCarousel');
-    carousel.scrollBy({
-        left: offset,
-        behavior: 'smooth'
-    });
-}
-
-// Opcional: Detección de gestos táctiles para mejor experiencia móvil
-let touchStartX = 0;
-let touchEndX = 0;
-
-const carousel = document.getElementById('candidateCarousel');
-
-carousel.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-carousel.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const SWIPE_THRESHOLD = 50;
-    const difference = touchStartX - touchEndX;
-    
-    if (Math.abs(difference) > SWIPE_THRESHOLD) {
-        if (difference > 0) {
-            // Swipe izquierda
-            scroll(200);
-        } else {
-            // Swipe derecha
-            scroll(-200);
-        }
+    <br>
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro de Encuestas</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
-}
-</script>
 
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(145deg, #f0f0f0, #dcdcdc);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
 
+    h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 40px;
+      text-align: center;
+      font-weight: 700;
+      background: linear-gradient(to right, #0083b0, #ff4b2b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    
-    
-    
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .boton {
+      width: 160px;
+      height: 160px;
+      background: white;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .boton::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease;
+      z-index: 0;
+    }
+
+    .boton span {
+      position: relative;
+      z-index: 1;
+      color: #000;
+      transition: color 0.3s ease;
+      text-align: center;
+    }
+
+    .boton:hover span {
+      color: white;
+    }
+
+    .boton.azul::before {
+      background: linear-gradient(120deg, #00b4db, #0083b0);
+    }
+
+    .boton.azul:hover::before {
+      left: 0;
+    }
+
+    .boton.rojo::before {
+      background: linear-gradient(120deg, #ff416c, #ff4b2b);
+    }
+
+    .boton.rojo:hover::before {
+      left: 0;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+      }
+
+      .boton {
+        width: 140px;
+        height: 140px;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
-
-
-
-
 <body>
+
+  <h1>Registro de encuestas por Categoría</h1>
+
+  <div class="container">
+    <button class="boton azul" onclick="window.location.href='intenciondevoto.html'">
+      <span>Intención de Voto</span>
+    </button>
+    <button class="boton rojo" onclick="window.location.href='evaluaciondegestion.html'">
+      <span>Evaluación de Gestión</span>
+    </button>
+  </div>
+
+</body>
+</html>
+
+    
     
 
   
@@ -1027,7 +296,7 @@ function handleSwipe() {
   
  
    
-  </div>
+
 
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
@@ -1049,7 +318,7 @@ function handleSwipe() {
 
 
 
-<!-- End Info Section -->>
+<!-- End Info Section -->
 
 
 
