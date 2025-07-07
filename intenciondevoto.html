@@ -325,7 +325,49 @@
       height: 100%;
       object-fit: cover;
     }
-    
+
+ /* Estilos para el botón de registros anteriores */
+        .registros-anteriores-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-registros-anteriores {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-registros-anteriores:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-registros-anteriores:active {
+            transform: translateY(0);
+        }
+        
+        .icon-folder {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+  
     .candidate-name {
       font-size: 14px;
       font-weight: bold;
@@ -2316,6 +2358,19 @@
 </div>
 </section>
 </div>
+
+  <!-- Botón de Registros Anteriores -->
+        <div class="registros-anteriores-container">
+            <a href="https://drive.google.com/drive/folders/1CMR1BO6UIh3oUXnAON4irS9sPVOXjHwe?usp=sharing" 
+               class="btn-registros-anteriores" 
+               target="_blank"
+               rel="noopener noreferrer">
+                <svg class="icon-folder" viewBox="0 0 24 24">
+                    <path d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z"/>
+                </svg>
+                Registros Anteriores
+            </a>
+        </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('province-select');
