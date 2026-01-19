@@ -193,14 +193,18 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><!DOCTYPE html>
+        </script>
+    
+    
+    
+    
+    <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Encuesta por Provincia</title
-  <!-- Estilos agregados del index.html -->
-  <style>
+<title>Encuesta Nacional y Regional</title>
+<style>
     :root {
       --primary-color: #3498db;
       --secondary-color: #f8f9fa;
@@ -241,7 +245,7 @@
       margin-bottom: 30px;
     }
     
-    .province-selector {
+    .survey-selector {
       margin-bottom: 30px;
       max-width: 300px;
     }
@@ -401,11 +405,11 @@
       padding: 10px;
     }
     
-    .province-data {
+    .survey-data {
       display: none;
     }
     
-    .province-data.active {
+    .survey-data.active {
       display: block;
     }
     
@@ -486,50 +490,6 @@
       text-align: center;
     }
     
-      
-       /* Estilos para el botón de registros anteriores */
-        .registros-anteriores-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-            margin-bottom: 20px;
-        }
-        
-        .btn-registros-anteriores {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            border: none;
-        }
-        
-        .btn-registros-anteriores:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-            text-decoration: none;
-            color: white;
-        }
-        
-        .btn-registros-anteriores:active {
-            transform: translateY(0);
-        }
-        
-        .icon-folder {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-      
-      
-      
     /* Responsive */
     @media (max-width: 768px) {
       h1 {
@@ -616,19 +576,35 @@
 </head>
 <body>
 <h1>ENCUESTA INTENCIÓN DE VOTO</h1>
-<h3>Del 01 al 12 de Diciembre del 2025</h3>
+<h3>Del 02 al 13 de Enero del 2026</h3>
 
-<div class="province-selector">
-<select id="province-select">
-<option value="maynas">Maynas</option>
+<div class="survey-selector">
+<select id="survey-select">
+<option value="nacional">Encuesta Nacional</option>
+<option value="regional">Encuesta Regional</option>
 </select>
 </div>
 
-<!-- MAYNAS -->
-<div class="province-data active" id="maynas-data">
+<!-- ==================== ENCUESTA NACIONAL ==================== -->
+<div class="survey-data active" id="nacional-data">
 <section class="poll-section">
 <h2>Candidatos Presidente de la República</h2>
 <div class="candidates-grid">
+    
+    
+    
+ <div class="candidate-card" data-color="#e74c3c">
+<div class="candidate-photo">
+<img alt="George Forsyth" src="images/george.png"/>
+<div class="candidate-name-overlay">GEORGE FORSYTH</div>
+</div>
+<div class="party-logo">
+<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
+<div class="party-name">Somos Perú</div>
+</div>
+<div class="percentage-section">19%</div>
+</div>   
+    
 
 <div class="candidate-card" data-color="#FF6B35">
 <div class="candidate-photo">
@@ -651,20 +627,10 @@
 <img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/>
 <div class="party-name">Renovación Popular</div>
 </div>
-<div class="percentage-section">14%</div>
+<div class="percentage-section">16%</div>
 </div>
 
-<div class="candidate-card" data-color="#e74c3c">
-<div class="candidate-photo">
-<img alt="George Forsyth" src="images/george.png"/>
-<div class="candidate-name-overlay">GEORGE FORSYTH</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-<div class="percentage-section">11%</div>
-</div>
+
 
 <div class="candidate-card" data-color="#e74c3c">
 <div class="candidate-photo">
@@ -675,7 +641,7 @@
 <img class="party-logo-img" alt="Perú Primero" src="images/logoperuprimero.png"/>
 <div class="party-name">Perú Primero</div>
 </div>
-<div class="percentage-section">9%</div>
+<div class="percentage-section">8%</div>
 </div>
 
 <div class="candidate-card" data-color="#2196F3">
@@ -690,21 +656,21 @@
 <div class="percentage-section">8%</div>
 </div>
 
-<div class="candidate-card" data-color="#e74c3c">
+<div class="candidate-card" data-color="#2196F3">
 <div class="candidate-photo">
-<img alt="Alfredo Barnechea" src="images/alfredobarnechea.png"/>
-<div class="candidate-name-overlay">ALFREDO BARNECHEA</div>
+<img alt="Alfredo Barnechea" src="images/joseluna.jpg"/>
+<div class="candidate-name-overlay">JOSÉ LUNA</div>
 </div>
 <div class="party-logo">
-<img class="party-logo-img" alt="Acción Popular" src="images/logoaccionpopular.png"/>
-<div class="party-name">Acción Popular</div>
+<img class="party-logo-img" alt="Acción Popular" src="images/logopodemosperu.png"/>
+<div class="party-name">Podemos perú</div>
 </div>
-<div class="percentage-section">7%</div>
+<div class="percentage-section">5%</div>
 </div>
 
 <div class="candidate-card" data-color="#f39c12">
 <div class="candidate-photo">
-<img alt="Carlos Álvarez" src="images/carlos.png"/>
+<img alt="Carlos Álvarez" src="images/carlosalvarez.jpg"/>
 <div class="candidate-name-overlay">CARLOS ÁLVAREZ</div>
 </div>
 <div class="party-logo">
@@ -719,7 +685,7 @@
 <img alt="No sabe" src="images/nosabe.png"/>
 <div class="candidate-name-overlay">NO SABE / NO OPINA</div>
 </div>
-<div class="percentage-section">21%</div>
+<div class="percentage-section">17%</div>
 </div>
 
 <div class="candidate-card" data-color="special">
@@ -727,121 +693,115 @@
 <img alt="Otros" src="images/otros.png"/>
 <div class="candidate-name-overlay">OTROS CANDIDATOS</div>
 </div>
-<div class="percentage-section">7%</div>
+<div class="percentage-section">4%</div>
 </div>
 
 </div>
-<div class="scroll-hint">Desliza para ver más candidatos →</div>
+<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
 </section>
 
 <section class="poll-section">
-<h2>¿Quién representará a Loreto en la Cámara de Senadores?</h2>
+<h2>¿Quiénes representarán a Loreto en la Cámara de Senadores?</h2>
 <div class="candidates-grid">
 
-    
-    <div class="party-card" data-color="#e74c3c">
+<div class="party-card" data-color="#e74c3c">
 <img class="party-card-logo" alt="Somos Perú" src="images/logosomosperu.png"/>
 <div class="party-card-name">Somos Perú</div>
-<div class="party-card-percentage">14%</div>
+<div class="party-card-percentage">18%</div>
 </div>
-    
-    
+
 <div class="party-card" data-color="#FF6B35">
 <img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
 <div class="party-card-name">Fuerza Popular</div>
-<div class="party-card-percentage">13%</div>
+<div class="party-card-percentage">15%</div>
 </div>
 
 <div class="party-card" data-color="#2196F3">
 <img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
 <div class="party-card-name">Renovación Popular</div>
-<div class="party-card-percentage">11%</div>
+<div class="party-card-percentage">15%</div>
 </div>
-
     
-<div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Renovación Popular" src="images/logoalianza.png"/>
-<div class="party-card-name">Alianza para el Progreso</div>
-<div class="party-card-percentage">10%</div>
-</div>
     
     <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logoperuprimero.png"/>
+<img class="party-card-logo" alt="Perú Primero" src="images/logoperuprimero.png"/>
 <div class="party-card-name">Perú Primero</div>
 <div class="party-card-percentage">9%</div>
 </div>
-    
-    
-        <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logoaccionpopular.png"/>
-<div class="party-card-name">Acción Popular</div>
+
+<div class="party-card" data-color="#2196F3">
+<img class="party-card-logo" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
+<div class="party-card-name">Alianza para el Progreso</div>
 <div class="party-card-percentage">8%</div>
 </div>
 
 <div class="party-card" data-color="#f39c12">
-<img class="party-card-logo" alt="Alianza para el Progreso" src="images/logopaisparatodos.png"/>
+<img class="party-card-logo" alt="País Para Todos" src="images/logopaisparatodos.png"/>
 <div class="party-card-name">País Para Todos</div>
-<div class="party-card-percentage">7%</div>
+<div class="party-card-percentage">6%</div>
+</div>
+
+
+<div class="party-card" data-color="#2196F3">
+<img class="party-card-logo" alt="Acción Popular" src="images/logopodemosperu.png"/>
+<div class="party-card-name">Podemos Perú</div>
+<div class="party-card-percentage">5%</div>
 </div>
 
 
 <div class="party-card" data-color="special">
 <img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/>
 <div class="party-card-name">No sabe / No opina</div>
-<div class="party-card-percentage">23%</div>
+<div class="party-card-percentage">21%</div>
 </div>
 
 <div class="party-card" data-color="special">
 <img class="party-card-logo" alt="Otros" src="images/otros.png"/>
 <div class="party-card-name">Otros partidos</div>
-<div class="party-card-percentage">5%</div>
+<div class="party-card-percentage">3%</div>
 </div>
 
 </div>
-<div class="scroll-hint"> Desliza para ver más partidos → </div>
+<div class="scroll-hint">↔ Desliza para ver más partidos</div>
 </section>
 
-    
-   <section class="poll-section">
+<section class="poll-section">
 <h2>Voto preferencial para la Cámara de Senadores</h2>
 <div class="candidates-grid">
 
-<div class="candidate-card" data-color="#e74c3c " data-no-percentage="true">
+<div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
 <div class="candidate-photo">
 <img alt="Jorge Morante" src="images/jorgemorante.jpg"/>
 <div class="candidate-name-overlay">Jorge Morante</div>
 </div>
 <div class="party-logo">
-<img class="party-logo-img" alt="Fuerza Popular" src="images/logosomosperu.png"/>
+<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
 <div class="party-name">Somos Perú</div>
 </div>
 </div>
 
-
 </div>
-<div class="scroll-hint"> Desliza para ver más candidatos → </div>
+<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
 </section>
-    
-    
-    
-    
-    
-    <section class="poll-section">
+
+<section class="poll-section">
 <h2>¿Quiénes representarán a Loreto en la Cámara de Diputados?</h2>
 <div class="candidates-grid">
 
-    <div class="party-card" data-color="#FF6B35">
-<img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-card-name">Fuerza Popular</div>
-<div class="party-card-percentage">17%</div>
-</div>
     
-    <div class="party-card" data-color="#e74c3c">
+  <div class="party-card" data-color="#e74c3c">
 <img class="party-card-logo" alt="Somos Perú" src="images/logosomosperu.png"/>
 <div class="party-card-name">Somos Perú</div>
-<div class="party-card-percentage">15%</div>
-</div>
+<div class="party-card-percentage">20%</div>
+</div>  
     
+<div class="party-card" data-color="#FF6B35">
+<img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
+<div class="party-card-name">Fuerza Popular</div>
+<div class="party-card-percentage">18%</div>
+</div>
+
+
 
 <div class="party-card" data-color="#2196F3">
 <img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
@@ -849,62 +809,66 @@
 <div class="party-card-percentage">12%</div>
 </div>
 
-    
 <div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Renovación Popular" src="images/logoalianza.png"/>
+<img class="party-card-logo" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
 <div class="party-card-name">Alianza para el Progreso</div>
-<div class="party-card-percentage">10%</div>
-</div>
-    
-    <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logoperuprimero.png"/>
-<div class="party-card-name">Perú Primero</div>
 <div class="party-card-percentage">9%</div>
 </div>
-    
-    
-        <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logoaccionpopular.png"/>
-<div class="party-card-name">Acción Popular</div>
+
+<div class="party-card" data-color="#e74c3c">
+<img class="party-card-logo" alt="Perú Primero" src="images/logoperulibre.jpg"/>
+<div class="party-card-name">Perú Libre</div>
 <div class="party-card-percentage">8%</div>
 </div>
 
+
+
 <div class="party-card" data-color="#f39c12">
-<img class="party-card-logo" alt="Alianza para el Progreso" src="images/logopaisparatodos.png"/>
+<img class="party-card-logo" alt="País Para Todos" src="images/logopaisparatodos.png"/>
 <div class="party-card-name">País Para Todos</div>
+<div class="party-card-percentage">7%</div>
+</div>
+    
+    <div class="party-card" data-color="#2196F3">
+<img class="party-card-logo" alt="Acción Popular" src="images/logopodemosperu.png"/>
+<div class="party-card-name">Podemos Perú</div>
 <div class="party-card-percentage">5%</div>
 </div>
-
 
 <div class="party-card" data-color="special">
 <img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/>
 <div class="party-card-name">No sabe / No opina</div>
-<div class="party-card-percentage">19%</div>
+<div class="party-card-percentage">17%</div>
 </div>
 
 <div class="party-card" data-color="special">
 <img class="party-card-logo" alt="Otros" src="images/otros.png"/>
 <div class="party-card-name">Otros partidos</div>
-<div class="party-card-percentage">5%</div>
+<div class="party-card-percentage">4%</div>
 </div>
 
 </div>
-<div class="scroll-hint"> Desliza para ver más partidos → </div>
+<div class="scroll-hint">↔ Desliza para ver más partidos</div>
 </section>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 <section class="poll-section">
 <h2>Voto preferencial para la Cámara de Diputados</h2>
 <div class="candidates-grid">
 
+    
+  <div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
+<div class="candidate-photo">
+<img alt="Jaime Marín" src="images/anazegarra.jpg"/>
+<div class="candidate-name-overlay">ANA ZEGARRA</div>
+</div>
+<div class="party-logo">
+<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
+<div class="party-name">Somos Perú</div>
+</div>
+</div>  
+    
+    
+    
 <div class="candidate-card" data-color="#FF6B35" data-no-percentage="true">
 <div class="candidate-photo">
 <img alt="César Vidaurre" src="images/cesarvidaurre.jpg"/>
@@ -918,17 +882,6 @@
     
     
     
-<div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
-<div class="candidate-photo">
-<img alt="Jaime Marín" src="images/jaimemarin.jpg"/>
-<div class="candidate-name-overlay">JAIME MARÍN</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-</div>
-
 <div class="candidate-card" data-color="#2196F3" data-no-percentage="true">
 <div class="candidate-photo">
 <img alt="Anthony Mera" src="images/anthonymera.png"/>
@@ -940,47 +893,153 @@
 </div>
 </div>
 
-
-<div class="candidate-card" data-color="#2196F3" data-no-percentage="true">
+<div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
 <div class="candidate-photo">
-<img alt="Frank Valderrama" src="images/frankvalderrama.jpg"/>
-<div class="candidate-name-overlay">FRANK VALDERRAMA</div>
+<img alt="Jaime Marín" src="images/jaimemarin.jpg"/>
+<div class="candidate-name-overlay">JAIME MARÍN</div>
 </div>
 <div class="party-logo">
-<img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
-<div class="party-name">Alianza para el Progreso</div>
+<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
+<div class="party-name">Somos Perú</div>
 </div>
 </div>
 
+
+
 </div>
-<div class="scroll-hint"> Desliza para ver más candidatos → </div>
+<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
 </section>
 
 </div>
+
+<!-- ==================== ENCUESTA REGIONAL ==================== -->
     
     
-    <!-- Botón de Registros Anteriores -->
-        <div class="registros-anteriores-container">
-            <a href="https://drive.google.com/drive/folders/1HZu8qOZP1s3tbyesWPjMRHpXxycB9E5U?usp=sharing" 
-               class="btn-registros-anteriores" 
-               target="_blank"
-               rel="noopener noreferrer">
-                <svg class="icon-folder" viewBox="0 0 24 24">
-                    <path d="M10 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2h-8l-2-2z"/>
-                </svg>
-                Registros Anteriores
-            </a>
-        </div>
+<!-- 
+
+
+<div class="survey-data" id="regional-data">
+<section class="poll-section">
+<h2>Candidatos Presidente de la República - Regional</h2>
+<div class="candidates-grid">
+
+<!-- Aquí puedes editar los datos de la encuesta regional -->
     
+    
+<!-- 
+
+<div class="candidate-card" data-color="#FF6B35">
+<div class="candidate-photo">
+<img alt="Keiko Fujimori" src="images/keyko.png"/>
+<div class="candidate-name-overlay">Lopez aliaga</div>
+</div>
+<div class="party-logo">
+<img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
+<div class="party-name">Fuerza Popular</div>
+</div>
+<div class="percentage-section">50%</div>
+</div>
+
+<div class="candidate-card" data-color="#2196F3">
+<div class="candidate-photo">
+<img alt="Rafael López" src="images/rafael.png"/>
+<div class="candidate-name-overlay">RAFAEL LÓPEZ ALIAGA</div>
+</div>
+<div class="party-logo">
+<img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/>
+<div class="party-name">Renovación Popular</div>
+</div>
+<div class="percentage-section">16%</div>
+</div>
+
+<div class="candidate-card" data-color="#e74c3c">
+<div class="candidate-photo">
+<img alt="George Forsyth" src="images/george.png"/>
+<div class="candidate-name-overlay">GEORGE FORSYTH</div>
+</div>
+<div class="party-logo">
+<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
+<div class="party-name">Somos Perú</div>
+</div>
+<div class="percentage-section">12%</div>
+</div>
+
+<div class="candidate-card" data-color="special">
+<div class="candidate-photo">
+<img alt="No sabe" src="images/nosabe.png"/>
+<div class="candidate-name-overlay">NO SABE / NO OPINA</div>
+</div>
+<div class="percentage-section">25%</div>
+</div>
+
+<div class="candidate-card" data-color="special">
+<div class="candidate-photo">
+<img alt="Otros" src="images/otros.png"/>
+<div class="candidate-name-overlay">OTROS CANDIDATOS</div>
+</div>
+<div class="percentage-section">27%</div>
+</div>
+
+</div>
+<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
+</section>
+-->
+    
+    
+    
+<!-- Aquí puedes agregar más secciones para la encuesta regional -->
+
+    <!--
+    <section class="poll-section">
+<h2>¿Quiénes representarán a Loreto en la Cámara de Senadores? - Regional</h2>
+<div class="candidates-grid">
+
+<div class="party-card" data-color="#e74c3c">
+<img class="party-card-logo" alt="Somos Perú" src="images/logosomosperu.png"/>
+<div class="party-card-name">Somos Perú</div>
+<div class="party-card-percentage">16%</div>
+</div>
+
+<div class="party-card" data-color="#FF6B35">
+<img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
+<div class="party-card-name">Fuerza Popular</div>
+<div class="party-card-percentage">15%</div>
+</div>
+
+<div class="party-card" data-color="#2196F3">
+<img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
+<div class="party-card-name">Renovación Popular</div>
+<div class="party-card-percentage">12%</div>
+</div>
+
+<div class="party-card" data-color="special">
+<img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/>
+<div class="party-card-name">No sabe / No opina</div>
+<div class="party-card-percentage">20%</div>
+</div>
+
+<div class="party-card" data-color="special">
+<img class="party-card-logo" alt="Otros" src="images/otros.png"/>
+<div class="party-card-name">Otros partidos</div>
+<div class="party-card-percentage">37%</div>
+</div>
+
+</div>
+<div class="scroll-hint">↔ Desliza para ver más partidos</div>
+</section> -->
+
+<!-- Puedes agregar más secciones según necesites -->
+
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const select = document.getElementById('province-select');
-  const provinceDataDivs = document.querySelectorAll('.province-data');
+  const select = document.getElementById('survey-select');
+  const surveyDataDivs = document.querySelectorAll('.survey-data');
 
   select.addEventListener('change', () => {
     const selected = select.value;
-    provinceDataDivs.forEach(div => {
+    surveyDataDivs.forEach(div => {
       div.classList.toggle('active', div.id === `${selected}-data`);
     });
   });
@@ -1027,4 +1086,4 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 </body>
-</html
+</html>
