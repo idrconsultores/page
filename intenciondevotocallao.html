@@ -548,6 +548,13 @@
       }
     }
     
+    /* ── Ficha Técnica responsive ── */
+@media (max-width: 680px) {
+  .ficha-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+    
     /* Animation on load */
     @keyframes fadeInUp {
       from {
@@ -885,7 +892,7 @@
 <section class="poll-section" style="margin-top:30px;">
   <h2 style="background-color:#1a3a5c; color:white; padding:9px 14px; border-radius:4px; margin-bottom:14px; border-bottom:none; font-size:1rem; letter-spacing:0.5px;">📋 FICHA TÉCNICA — ENCUESTA INTENCIÓN DE VOTO ABRIL 2026</h2>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12px;">
+ <div class="ficha-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:12px;">
 
     <!-- Columna izquierda -->
     <div style="border:1px solid #ddd; border-radius:4px; overflow:hidden;">
