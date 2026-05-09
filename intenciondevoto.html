@@ -1,1105 +1,1828 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-   <meta name="keywords" content="IDR Consultores" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-<meta property="og:image" content="https://i.ibb.co/Zg4vMt6/logoidr1.png" />
-
-  <title>IDR encuestas</title>
-
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
-  <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
-
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
-
-  <!-- Estilos agregados del index.html -->
-  <style>
-    .legend {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
-
-    .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .legend-color {
-        width: 20px;
-        height: 20px;
-    }
-
-    .polls-container {
-        margin-bottom: 40px;
-    }
-
-    .candidate-row {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        gap: 10px;
-    }
-
-    .candidate-info {
-        display: flex;
-        flex-direction: column;
-        width: 150px;
-    }
-
-    .candidate-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #ddd;
-    }
-
-    .bars-container {
-        flex-grow: 1;
-        height: 30px;
-        display: flex;
-        background: #f0f0f0;
-    }
-
-    .bar {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 12px;
-    }
-
-    .bar-aprobado { background-color: #2196F3; }
-    .bar-desaprobado { background-color: #f44336; }
-    .bar-no-sabe { background-color: #FF9800; }
-
-    .dates-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    .dates-table th {
-        background-color: #f5f5f5;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .dates-table td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        cursor: pointer;
-    }
-
-    .dates-table tr:hover {
-        background-color: #f0f0f0;
-    }
-  </style>
-   
-</head>
-
-<body class="sub_page">
-
-  <div class="hero_area">
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <img src="images/logoidr.png" alt="Logo" class="logo-img" style="max-height: 50px;">
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="encuestas.html"> Encuestas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="noticias.html">Noticias</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacto.html">Contáctanos</a>
-              </li>
-            </ul>
-            <div class="quote_btn-container">
-              <a href="" class="quote_btn">
-                Get A Quote
-              </a>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
-    
-    
-    
-    <br>
-    <br>
-    
-    
-    
-
-
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row =>
-                    row.some(cell => cell !== '' && cell !== null && cell !== undefined)
-                );
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script>
-    
-    
-    
-    
-    <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Encuesta Nacional y Regional</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <meta name="keywords" content="IDR Consultores" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+<meta property="og:image" content="https://i.ibb.co/Zg4vMt6/logoidr1.png" />
+    
+<title>IDR Encuestas — Intención de Loreto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-    :root {
-      --primary-color: #3498db;
-      --secondary-color: #f8f9fa;
-      --border-color: #e0e0e0;
-      --text-color: #333;
-      --highlight-color: #2980b9;
-      --orange: #FF6B35;
-      --blue: #2196F3;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-      background-color: #f5f5f5;
-      color: var(--text-color);
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--primary-color);
-      font-size: 1.8rem;
-    }
-    
-    h3 {
-      text-align: center;
-      color: #666;
-      font-weight: normal;
-      margin-bottom: 30px;
-    }
-    
-    .survey-selector {
-      margin-bottom: 30px;
-      max-width: 300px;
-    }
-    
-    select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid var(--border-color);
-      border-radius: 5px;
-      font-size: 16px;
-      background-color: white;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    select:focus {
-      outline: none;
-      border-color: var(--highlight-color);
-      box-shadow: 0 0 0 2px rgba(41, 128, 185, 0.3);
-    }
-    
-    .poll-section {
-      margin-bottom: 40px;
-      background-color: white;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    
-    .poll-section h2 {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--border-color);
-      color: var(--text-color);
-    }
-    
-    .candidates-grid {
-      display: flex;
-      overflow-x: auto;
-      gap: 15px;
-      margin-top: 20px;
-      padding-bottom: 15px;
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary-color) var(--secondary-color);
-    }
-    
-    .candidates-grid::-webkit-scrollbar {
-      height: 8px;
-    }
-    
-    .candidates-grid::-webkit-scrollbar-track {
-      background: var(--secondary-color);
-      border-radius: 10px;
-    }
-    
-    .candidates-grid::-webkit-scrollbar-thumb {
-      background-color: var(--primary-color);
-      border-radius: 10px;
-    }
-    
-    .candidates-grid::-webkit-scrollbar-thumb:hover {
-      background-color: var(--highlight-color);
-    }
-    
-    .candidate-card {
-      background-color: white;
-      border-radius: 0;
-      overflow: hidden;
-      border: none;
-      transition: all 0.3s ease;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      min-width: 220px;
-      max-width: 220px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    .candidate-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    
-    .candidate-photo {
-      grid-column: 1;
-      grid-row: 1 / 3;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      background-color: #f0f0f0;
-      padding-bottom: 35px;
-    }
-    
-    .candidate-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-    
-    .candidate-name-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: white;
-      padding: 8px 5px;
-      text-align: center;
-      font-weight: 900;
-      font-size: 10px;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-    
-    .party-logo {
-      grid-column: 2;
-      grid-row: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 6px;
-      background: white;
-      gap: 3px;
-    }
-    
-    .party-logo-img {
-      width: 45px;
-      height: 45px;
-      object-fit: contain;
-      object-position: center;
-    }
-    
-    .party-name {
-      font-size: 8px;
-      text-align: center;
-      color: #333;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1.2;
-    }
-    
-    .percentage-section {
-      grid-column: 2;
-      grid-row: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      padding: 10px;
-    }
-    
-    .survey-data {
-      display: none;
-    }
-    
-    .survey-data.active {
-      display: block;
-    }
-    
-    .scroll-hint {
-      text-align: center;
-      color: #95a5a6;
-      font-size: 13px;
-      margin-top: 15px;
-      display: block;
-    }
-    
-    /* Cards without percentage */
-    [data-no-percentage="true"] .percentage-section {
-      display: none;
-    }
-    
-    [data-no-percentage="true"] .party-logo {
-      grid-row: 1 / 3;
-      justify-content: center;
-    }
-    
-    /* Special styling for "No sabe" and "Otros" */
-    [data-color="special"] .percentage-section {
-      grid-row: 1 / 3;
-      font-size: 36px;
-    }
-    
-    [data-color="special"] .party-logo {
-      display: none;
-    }
-    
-    /* Simple style for party-only cards */
-    .party-card {
-      background-color: white;
-      border-radius: 8px;
-      overflow: hidden;
-      border: none;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 180px;
-      max-width: 180px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 15px 10px;
-      gap: 10px;
-    }
-    
-    .party-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    
-    .party-card-logo {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      object-position: center;
-    }
-    
-    .party-card-name {
-      font-size: 10px;
-      text-align: center;
-      color: #333;
-      font-weight: 900;
-      text-transform: uppercase;
-      line-height: 1.3;
-    }
-    
-    .party-card-percentage {
-      font-size: 32px;
-      font-weight: bold;
-      color: white;
-      padding: 8px 20px;
-      border-radius: 5px;
-      min-width: 80px;
-      text-align: center;
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.5rem;
-      }
-      
-      .candidates-grid {
-        gap: 12px;
-      }
-      
-      .candidate-card {
-        min-width: 200px;
-        max-width: 200px;
-      }
-      
-      .poll-section {
-        padding: 15px;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      body {
-        padding: 10px;
-      }
-      
-      .candidate-card {
-        min-width: 180px;
-        max-width: 180px;
-      }
-      
-      .candidates-grid {
-        gap: 10px;
-      }
-      
-      .candidate-name-overlay {
-        font-size: 8px;
-        padding: 5px 3px;
-      }
-      
-      .party-logo-img {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .party-name {
-        font-size: 6px;
-      }
-      
-      .percentage-section {
-        font-size: 24px;
-        padding: 8px;
-      }
-      
-      [data-color="special"] .percentage-section {
-        font-size: 30px;
-      }
-    }
-    
-    /* Animation on load */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .candidate-card {
-      animation: fadeInUp 0.5s ease-out forwards;
-    }
-    
-    .candidate-card:nth-child(1) { animation-delay: 0.05s; }
-    .candidate-card:nth-child(2) { animation-delay: 0.1s; }
-    .candidate-card:nth-child(3) { animation-delay: 0.15s; }
-    .candidate-card:nth-child(4) { animation-delay: 0.2s; }
-    .candidate-card:nth-child(5) { animation-delay: 0.25s; }
-    .candidate-card:nth-child(6) { animation-delay: 0.3s; }
-    .candidate-card:nth-child(7) { animation-delay: 0.35s; }
-    .candidate-card:nth-child(8) { animation-delay: 0.4s; }
+/* =========================================================
+   VARIABLES & RESET
+   ========================================================= */
+:root {
+  --navy:      #0d2540;
+  --navy-mid:  #1a3a5c;
+  --accent:    #e8c430;
+  --light-bg:  #f2f5f9;
+  --card-bg:   #ffffff;
+  --border:    #dde4ee;
+  --text:      #1e2d3d;
+  --muted:     #6b7f95;
+  --radius:    12px;
+  --shadow:    0 4px 20px rgba(13,37,64,.08);
+  --shadow-lg: 0 12px 40px rgba(13,37,64,.16);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--light-bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =========================================================
+   HEADER — original del cliente
+   ========================================================= */
+.header_section {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.custom_nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.logo-img { height: 50px; object-fit: contain; }
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  margin: 0; padding: 0;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.navbar-nav .nav-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 6px;
+  transition: all .2s;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.navbar-nav .nav-link:hover { background: #c0392b; color: #fff; }
+.navbar-nav .nav-item.active .nav-link { color: #333; }
+.nav-btn {
+  background: #c0392b;
+  color: #fff !important;
+  border-radius: 6px;
+}
+.nav-btn:hover { background: #a93226 !important; }
+
+/* Hamburger */
+.navbar-toggler {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border: 1.5px solid #ccc;
+  background: none;
+  border-radius: 4px;
+}
+.navbar-toggler span {
+  width: 22px; height: 2px;
+  background: #333;
+  display: block;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .navbar-toggler { display: flex; }
+  .navbar-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0 14px;
+    gap: 4px;
+  }
+  .navbar-nav.open { display: flex; }
+  .navbar-nav .nav-link { width: 100%; }
+  .custom_nav-container { padding: 10px 16px; }
+}
+
+/* =========================================================
+   HERO BANNER
+   ========================================================= */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e4d7b 100%);
+  color: #fff;
+  padding: 48px 24px 52px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-label {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(26px, 5vw, 48px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero h1 span { color: inherit; }
+.h1-white { color: #ffffff; }
+.h1-red   { color: #e8192c; }
+.h1-blue  { color: #4ab3f4; }
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.7);
+  font-weight: 300;
+  letter-spacing: .5px;
+}
+.hero-date-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 18px;
+  background: rgba(255,255,255,.12);
+  border: 2px solid rgba(255,255,255,.4);
+  border-radius: 30px;
+  padding: 8px 22px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  transition: opacity .3s ease;
+}
+@media (max-width: 600px) {
+  .hero-date-badge { font-size: 13px; padding: 7px 16px; }
+}
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.hero-badge {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,.85);
+  backdrop-filter: blur(4px);
+}
+.hero-badge strong { color: #fff; }
+
+/* =========================================================
+   MAIN CONTENT WRAPPER
+   ========================================================= */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+/* =========================================================
+   SURVEY SELECTOR TABS
+   ========================================================= */
+.survey-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: var(--shadow);
+  width: fit-content;
+}
+.tab-btn {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 24px;
+  border-radius: 7px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+  transition: all .2s;
+  letter-spacing: .3px;
+}
+.tab-btn.active {
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(13,37,64,.3);
+}
+.tab-btn:hover:not(.active) {
+  background: var(--light-bg);
+  color: var(--text);
+}
+
+/* Survey data toggle */
+.survey-data { display: none; }
+.survey-data.active { display: block; }
+
+/* =========================================================
+   SECTION CARDS
+   ========================================================= */
+.poll-section {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 2px solid var(--light-bg);
+}
+.section-number {
+  width: 32px; height: 32px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+  letter-spacing: .3px;
+}
+.section-body {
+  padding: 20px 24px 24px;
+}
+
+/* =========================================================
+   SCROLL CONTAINER
+   ========================================================= */
+.scroll-wrapper { position: relative; }
+.scroll-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 20px;
+  width: 40px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.9));
+  pointer-events: none;
+  border-radius: 0 8px 8px 0;
+}
+
+.candidates-grid {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.candidates-grid::-webkit-scrollbar { height: 4px; }
+.candidates-grid::-webkit-scrollbar-track { background: transparent; }
+.candidates-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.scroll-hint {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: .5px;
+}
+.scroll-hint::before { content: '← '; }
+.scroll-hint::after  { content: ' →'; }
+
+/* =========================================================
+   CANDIDATE CARDS (Presidentes / Preferencial)
+   ========================================================= */
+.candidate-card {
+  flex-shrink: 0;
+  width: 180px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+  display: flex;
+  flex-direction: column;
+  animation: fadeUp .4s ease both;
+}
+.candidate-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+.candidate-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #e9eef5;
+  flex-shrink: 0;
+}
+.candidate-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+}
+.candidate-name-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  color: #fff;
+  padding: 18px 8px 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  line-height: 1.2;
+  text-align: center;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 100%);
+}
+
+.card-bottom {
+  display: flex;
+  flex: 1;
+}
+.party-logo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 6px;
+  gap: 5px;
+  background: #fafbfd;
+  border-right: 1px solid var(--border);
+}
+.party-logo-img {
+  width: 40px; height: 40px;
+  object-fit: contain;
+}
+.party-name {
+  font-size: 7.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #444;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.percentage-section {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Anton', 'Impact', 'Arial Black', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #fff;
+  letter-spacing: 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+/* No percentage variant */
+.candidate-card[data-no-percentage="true"] .percentage-section { display: none; }
+.candidate-card[data-no-percentage="true"] .party-logo {
+  border-right: none;
+  flex: 1;
+  padding: 14px;
+}
+.candidate-card[data-no-percentage="true"] .party-logo-img {
+  width: 56px; height: 56px;
+}
+.candidate-card[data-no-percentage="true"] .party-name { font-size: 9px; }
+
+/* "No sabe" / special card */
+.candidate-card[data-color="special"] .card-bottom { justify-content: center; }
+.candidate-card[data-color="special"] .party-logo { display: none; }
+.candidate-card[data-color="special"] .percentage-section {
+  width: 100%;
+  font-size: 34px;
+  font-family: 'Anton', 'Impact', 'Arial Black', sans-serif;
+  text-shadow: 0 1px 3px rgba(0,0,0,.3);
+  background: #95a5a6 !important;
+  border-top: 3px solid #bdc3c7;
+}
+
+/* =========================================================
+   PARTY CARDS (Senadores / Diputados)
+   ========================================================= */
+.party-card {
+  flex-shrink: 0;
+  width: 160px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 10px 0;
+  gap: 8px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  animation: fadeUp .4s ease both;
+}
+.party-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.party-card-logo {
+  width: 72px; height: 72px;
+  object-fit: contain;
+}
+.party-card-name {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #444;
+  text-align: center;
+  line-height: 1.35;
+  letter-spacing: .3px;
+}
+.party-card-percentage {
+  width: 100%;
+  text-align: center;
+  font-family: 'Anton', 'Impact', 'Arial Black', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #fff;
+  padding: 10px 0;
+  margin-top: 4px;
+  letter-spacing: 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+.party-card[data-color="special"] .party-card-percentage { background: #95a5a6 !important; }
+
+/* Representantes label: smaller font so text fits */
+.party-card-percentage.is-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 12px 8px;
+}
+
+/* =========================================================
+   PROGRESS BAR VIEW (partido list with bars)
+   Shown on larger screens as alternative visualization
+   ========================================================= */
+.bar-list {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+.bar-row img { width: 36px; height: 36px; object-fit: contain; }
+.bar-track {
+  height: 28px;
+  background: var(--light-bg);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 44px 1fr 58px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.bar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.bar-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bar-fill {
+  height: 26px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: transparent;
+  transition: width .8s cubic-bezier(.16,1,.3,1);
+  min-width: 12px;
+}
+.bar-label {
+  font-family: 'Anton', 'Impact', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--text);
+  text-align: right;
+}
+
+/* =========================================================
+   VIEW TOGGLE (Card / Barra)
+   ========================================================= */
+.view-toggle {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+.view-btn {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+  font-family: 'Barlow', sans-serif;
+}
+.view-btn.active {
+  background: var(--navy-mid);
+  border-color: var(--navy-mid);
+  color: #fff;
+}
+
+/* =========================================================
+   FICHA TÉCNICA
+   ========================================================= */
+.ficha-section {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-top: 8px;
+}
+.ficha-header {
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ficha-header-icon { font-size: 18px; }
+.ficha-header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.ficha-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+@media (max-width: 680px) {
+  .ficha-body { grid-template-columns: 1fr; }
+}
+.ficha-col { padding: 20px 24px; }
+.ficha-col:first-child { border-right: 1px solid var(--border); }
+@media (max-width: 680px) {
+  .ficha-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+.ficha-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ficha-table tr { border-bottom: 1px solid #f0f2f6; }
+.ficha-table tr:last-child { border-bottom: none; }
+.ficha-table td { padding: 7px 10px; }
+.ficha-table td:first-child {
+  color: var(--muted);
+  font-style: italic;
+  width: 40%;
+  white-space: nowrap;
+}
+.ficha-table .highlight { font-weight: 700; color: var(--navy); }
+
+.muestra-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.muestra-table thead tr { background: var(--navy); color: #fff; }
+.muestra-table th, .muestra-table td {
+  padding: 7px 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.muestra-table th:first-child, .muestra-table td:first-child { text-align: left; }
+.muestra-table tbody tr:nth-child(even) { background: #f7f9fc; }
+.muestra-table tfoot tr { background: var(--navy); color: #fff; font-weight: 700; }
+.muestra-source { font-size: 10px; color: var(--muted); margin-top: 6px; }
+
+.ficha-notes {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: var(--light-bg);
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #4a5568;
+}
+.ficha-notes strong { color: var(--navy-mid); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  background: var(--navy);
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.site-footer strong { color: rgba(255,255,255,.9); }
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.candidate-card:nth-child(1), .party-card:nth-child(1) { animation-delay: .04s; }
+.candidate-card:nth-child(2), .party-card:nth-child(2) { animation-delay: .08s; }
+.candidate-card:nth-child(3), .party-card:nth-child(3) { animation-delay: .12s; }
+.candidate-card:nth-child(4), .party-card:nth-child(4) { animation-delay: .16s; }
+.candidate-card:nth-child(5), .party-card:nth-child(5) { animation-delay: .20s; }
+.candidate-card:nth-child(6), .party-card:nth-child(6) { animation-delay: .24s; }
+.candidate-card:nth-child(7), .party-card:nth-child(7) { animation-delay: .28s; }
+.candidate-card:nth-child(8), .party-card:nth-child(8) { animation-delay: .32s; }
+.candidate-card:nth-child(9), .party-card:nth-child(9) { animation-delay: .36s; }
+
+/* =========================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================= */
+@media (max-width: 600px) {
+  .main-content { padding: 20px 12px 48px; }
+  .section-body { padding: 16px 14px 18px; }
+  .section-header { padding: 14px 16px; }
+  .candidate-card { width: 160px; }
+  .candidate-photo { height: 140px; }
+  .party-card { width: 140px; }
+  .hero { padding: 36px 16px 40px; }
+  .survey-tabs { width: 100%; }
+  .tab-btn { flex: 1; text-align: center; }
+}
+
+/* Margin error pill */
+.margin-pill {
+  display: inline-block;
+  background: #fff7e0;
+  border: 1px solid #f0d060;
+  color: #8a6500;
+  border-radius: 20px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 6px;
+}
 </style>
 </head>
 <body>
-<h1>ENCUESTA INTENCIÓN DE VOTO LORETO</h1>
-<h3>Del 02 al 12 de Febrero del 2026</h3>
 
-<div class="survey-selector">
-<select id="survey-select">
-<option value="nacional">Encuesta Nacional</option>
-<option value="regional">Encuesta Regional</option>
-</select>
-</div>
+<!-- ===== HEADER (original del cliente) ===== -->
+<header class="header_section">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg custom_nav-container">
+      <img src="images/logoidr.png" alt="Logo IDR" class="logo-img">
+      <button class="navbar-toggler" id="navToggle" type="button" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar-nav" id="navLinks">
+        <li class="nav-item"><a class="nav-link nav-btn" href="index.html">Inicio</a></li>
+        <li class="nav-item active"><a class="nav-link" href="encuestas.html">Encuestas</a></li>
+        <li class="nav-item"><a class="nav-link nav-btn" href="noticias.html">Noticias</a></li>
+        <li class="nav-item"><a class="nav-link nav-btn" href="contacto.html">Contáctanos</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-<!-- ==================== ENCUESTA NACIONAL ==================== -->
-<div class="survey-data active" id="nacional-data">
-<section class="poll-section">
-<h2>Candidatos Presidente de la República</h2>
-<div class="candidates-grid">
-    
-    
-    
- <div class="candidate-card" data-color="#e74c3c">
-<div class="candidate-photo">
-<img alt="George Forsyth" src="images/george.png"/>
-<div class="candidate-name-overlay">GEORGE FORSYTH</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-<div class="percentage-section">21%</div>
-</div>   
-    
-
-<div class="candidate-card" data-color="#FF6B35">
-<div class="candidate-photo">
-<img alt="Keiko Fujimori" src="images/keyko.png"/>
-<div class="candidate-name-overlay">KEIKO FUJIMORI</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-name">Fuerza Popular</div>
-</div>
-<div class="percentage-section">20%</div>
+<!-- ===== HERO ===== -->
+<div class="hero">
+  
+  <h1><span class="h1-white">Encuesta</span> <span class="h1-red">Intención</span> <span class="h1-white">de Voto</span><br><span class="h1-blue">Loreto</span> <span class="h1-red">2026</span></h1>
+  <div class="hero-date-badge" id="hero-date-badge">
+    <span id="hero-date-text">Del 16 al 27 de Marzo del 2026</span>
+  </div>
 </div>
 
-<div class="candidate-card" data-color="#2196F3">
-<div class="candidate-photo">
-<img alt="Rafael López" src="images/rafael.png"/>
-<div class="candidate-name-overlay">RAFAEL LÓPEZ ALIAGA</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/>
-<div class="party-name">Renovación Popular</div>
-</div>
-<div class="percentage-section">19%</div>
-</div>
+<!-- ===== MAIN ===== -->
+<main class="main-content">
 
-    
-    
-<div class="candidate-card" data-color="#2196F3">
-<div class="candidate-photo">
-<img alt="César Acuña" src="images/cesar1.png"/>
-<div class="candidate-name-overlay">CÉSAR ACUÑA</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
-<div class="party-name">Alianza para el Progreso</div>
-</div>
-<div class="percentage-section">10%</div>
-</div>
+  <!-- Tabs -->
+  <div class="survey-tabs">
+    <button class="tab-btn active" data-target="nacional-data">Encuesta Nacional</button>
+    <button class="tab-btn" data-target="regional-data">Encuesta Regional</button>
+  </div>
 
-    
-    <div class="candidate-card" data-color="#f39c12">
-<div class="candidate-photo">
-<img alt="Carlos Álvarez" src="images/carlosalvarez.jpg"/>
-<div class="candidate-name-overlay">CARLOS ÁLVAREZ</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="País para Todos" src="images/logopaisparatodos.png"/>
-<div class="party-name">País para Todos</div>
-</div>
-<div class="percentage-section">7%</div>
-</div>
+  <!-- ===== NACIONAL ===== -->
+  <div class="survey-data active" id="nacional-data">
 
+    <!-- SEC 1: Presidente -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">Candidatos Presidente de la República</div>
+      </div>
+      <div class="section-body">
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="cards" data-section="pres">Tarjetas</button>
+          <button class="view-btn" data-view="bars" data-section="pres">Barras</button>
+        </div>
 
-<div class="candidate-card" data-color="#e74c3c">
-<div class="candidate-photo">
-<img alt="Mario Vizcarra" src="images/mariovizcarra.png"/>
-<div class="candidate-name-overlay">MARIO VIZCARRA</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Perú Primero" src="images/logoperuprimero.png"/>
-<div class="party-name">Perú Primero</div>
-</div>
-<div class="percentage-section">5%</div>
-</div>
+        <!-- Card view -->
+        <div class="scroll-wrapper" id="pres-cards-view">
+          <div class="candidates-grid">
+              
+              
+              
+              <div class="candidate-card" data-color="#FF6B35">
+              <div class="candidate-photo">
+                <img alt="Keiko Fujimori" src="images/keyko.png"/>
+                <div class="candidate-name-overlay">KEIKO FUJIMORI</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
+                  <div class="party-name">Fuerza Popular</div>
+                </div>
+                <div class="percentage-section">19%</div>
+              </div>
+            </div>
 
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Rafael López Aliaga" src="images/rafael.png"/>
+                <div class="candidate-name-overlay">RAFAEL LÓPEZ ALIAGA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/>
+                  <div class="party-name">Renovación Popular</div>
+                </div>
+                <div class="percentage-section">18%</div>
+              </div>
+            </div>
 
-<div class="candidate-card" data-color="#2196F3">
-<div class="candidate-photo">
-<img alt="Alfredo Barnechea" src="images/joseluna.jpg"/>
-<div class="candidate-name-overlay">JOSÉ LUNA</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Acción Popular" src="images/logopodemosperu.png"/>
-<div class="party-name">Podemos perú</div>
-</div>
-<div class="percentage-section">4%</div>
-</div>
+              <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="César Acuña" src="images/cesar1.png"/>
+                <div class="candidate-name-overlay">CÉSAR ACUÑA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
+                  <div class="party-name">Alianza para el Progreso</div>
+                </div>
+                <div class="percentage-section">15%</div>
+              </div>
+            </div>
 
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="López Chau" src="images/george.png"/>
+                <div class="candidate-name-overlay">George Forsyht</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="Ahora Nación" src="images/logosomosperu.png"/>
+                  <div class="party-name">Somos Perú</div>
+                </div>
+                <div class="percentage-section">14%</div>
+              </div>
+            </div>
 
-<div class="candidate-card" data-color="special">
-<div class="candidate-photo">
-<img alt="No sabe" src="images/nosabe.png"/>
-<div class="candidate-name-overlay">NO SABE / NO OPINA</div>
-</div>
-<div class="percentage-section">11%</div>
-</div>
+          
 
-<div class="candidate-card" data-color="special">
-<div class="candidate-photo">
-<img alt="Otros" src="images/otros.png"/>
-<div class="candidate-name-overlay">OTROS CANDIDATOS</div>
-</div>
-<div class="percentage-section">3%</div>
-</div>
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Roberto Sanchez" src="images/mariovizcarra.png"/>
+                <div class="candidate-name-overlay">MARIO VISCARRA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="Juntos por el Perú" src="images/logoperuprimero.png"/>
+                  <div class="party-name">Perú Primero </div>
+                </div>
+                <div class="percentage-section">11%</div>
+              </div>
+            </div>
 
-</div>
-<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
-</section>
+            <div class="candidate-card" data-color="#f39c12">
+              <div class="candidate-photo">
+                <img alt="Carlos Álvarez" src="images/carlosalvarez.jpg"/>
+                <div class="candidate-name-overlay">CARLOS ÁLVAREZ</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="País para Todos" src="images/logopaisparatodos.png"/>
+                  <div class="party-name">País para Todos</div>
+                </div>
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
 
-<section class="poll-section">
-<h2>¿Quiénes representarán a Loreto en la Cámara de Senadores?</h2>
-<div class="candidates-grid">
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Jose Williams" src="images/joseluna.jpg"/>
+                <div class="candidate-name-overlay">JOSE LUNA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo">
+                  <img class="party-logo-img" alt="Avanza País" src="images/logopodemosperu.png"/>
+                  <div class="party-name">Podemos Perú</div>
+                </div>
+                <div class="percentage-section">5%</div>
+              </div>
+            </div>
 
-<div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-card-name">Somos Perú</div>
-<div class="party-card-percentage">19%</div>
-</div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo">
+                <img alt="No sabe" src="images/nosabe.png"/>
+                <div class="candidate-name-overlay">NO SABE / NO OPINA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
 
-<div class="party-card" data-color="#FF6B35">
-<img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-card-name">Fuerza Popular</div>
-<div class="party-card-percentage">18%</div>
-</div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo">
+                <img alt="Otros" src="images/otros.png"/>
+                <div class="candidate-name-overlay">OTROS CANDIDATOS</div>
+              </div>
+              <div class="card-bottom">
+                <div class="percentage-section">2%</div>
+              </div>
+            </div>
 
-<div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
-<div class="party-card-name">Renovación Popular</div>
-<div class="party-card-percentage">16%</div>
-</div>
-    
-    <div class="party-card" data-color="#f39c12">
-<img class="party-card-logo" alt="País Para Todos" src="images/logopaisparatodos.png"/>
-<div class="party-card-name">País Para Todos</div>
-<div class="party-card-percentage">10%</div>
-</div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
 
-    <div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
-<div class="party-card-name">Alianza para el Progreso</div>
-<div class="party-card-percentage">8%</div>
-</div>
+        <!-- Bar view -->
+        <div class="bar-list" id="pres-bars-view">
+          <div class="bar-row"><img src="images/logofuerzapopular.png" alt=""><div class="bar-col"><div class="bar-name">Keiko Fujimori</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="63.3%" data-color="#FF6B35"></div></div></div><span class="bar-label">19%</span></div>
+          <div class="bar-row"><img src="images/logorenovacion.png" alt=""><div class="bar-col"><div class="bar-name">Rafael López Aliaga</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="60%" data-color="#2196F3"></div></div></div><span class="bar-label">18%</span></div>
+          <div class="bar-row"><img src="images/logoalianza.png" alt=""><div class="bar-col"><div class="bar-name">César Acuña</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="50%" data-color="#2196F3"></div></div></div><span class="bar-label">15%</span></div>
+          <div class="bar-row"><img src="images/logosomosperu.png" alt=""><div class="bar-col"><div class="bar-name">George Forsyth</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="46.7%" data-color="#e74c3c"></div></div></div><span class="bar-label">14%</span></div>
+          <div class="bar-row"><img src="images/logoperuprimero.png" alt=""><div class="bar-col"><div class="bar-name">Mario Vizcarra</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="36.7%" data-color="#e74c3c"></div></div></div><span class="bar-label">11%</span></div>
+          <div class="bar-row"><img src="images/logopaisparatodos.png" alt=""><div class="bar-col"><div class="bar-name">Carlos Álvarez</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="26.7%" data-color="#f39c12"></div></div></div><span class="bar-label">8%</span></div>
+          <div class="bar-row"><img src="images/logopodemosperu.png" alt=""><div class="bar-col"><div class="bar-name">Jose Luna</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="16.7%" data-color="#2196F3"></div></div></div><span class="bar-label">5%</span></div>
+        </div>
+      </div>
+    </div>
 
-    
-    <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Perú Primero" src="images/logoperuprimero.png"/>
-<div class="party-card-name">Perú Primero</div>
-<div class="party-card-percentage">6%</div>
-</div>
+    <!-- SEC 2: Senadores -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div class="section-title">¿Quiénes representarán a Loreto en la Cámara de Senadores?</div>
+      </div>
+      <div class="section-body">
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="cards" data-section="sen">Tarjetas</button>
+          <button class="view-btn" data-view="bars" data-section="sen">Barras</button>
+        </div>
 
+        <div class="scroll-wrapper" id="sen-cards-view">
+          <div class="candidates-grid">
+              
+                    <div class="party-card" data-color="#e74c3c"><img class="party-card-logo" alt="Avanza País" src="images/logosomosperu.png"/><div class="party-card-name">Somos Perú </div><div class="party-card-percentage">17%</div></div>
+              
+                  <div class="party-card" data-color="#FF6B35"><img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/><div class="party-card-name">Fuerza Popular</div><div class="party-card-percentage">16%</div></div>
+              
+            <div class="party-card" data-color="#2196F3"><img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/><div class="party-card-name">Renovación Popular</div><div class="party-card-percentage">15%</div></div>
+              
+        
+                  <div class="party-card" data-color="#2196F3"><img class="party-card-logo" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-card-name">Alianza para el Progreso</div><div class="party-card-percentage">14%</div></div>
+              
+         
+              
+            <div class="party-card" data-color="#e74c3c"><img class="party-card-logo" alt="Juntos por el Perú" src="images/logoperuprimero.png"/><div class="party-card-name">Perú Primero</div><div class="party-card-percentage">11%</div></div>
+              
+            <div class="party-card" data-color="#f39c12"><img class="party-card-logo" alt="País Para Todos" src="images/logopaisparatodos.png"/><div class="party-card-name">País Para Todos</div><div class="party-card-percentage">7%</div></div>
+              
+                <div class="party-card" data-color="#2196F3"><img class="party-card-logo" alt="Alianza para el Progreso" src="images/logopodemosperu.png"/><div class="party-card-name">Podemos Perú</div><div class="party-card-percentage">6%</div></div>
+              
+      
+            <div class="party-card" data-color="special"><img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/><div class="party-card-name">No sabe / No opina</div><div class="party-card-percentage" style="background:#95a5a6">12%</div></div>
+              
+            <div class="party-card" data-color="special"><img class="party-card-logo" alt="Otros" src="images/otros.png"/><div class="party-card-name">Otros partidos</div><div class="party-card-percentage" style="background:#95a5a6">2%</div></div>
+              
+          </div>
+          <div class="scroll-hint">Desliza para ver más partidos</div>
+        </div>
+        <div class="bar-list" id="sen-bars-view">
+          <div class="bar-row"><img src="images/logosomosperu.png" alt=""><div class="bar-col"><div class="bar-name">Somos Perú</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="56.7%" data-color="#e74c3c"></div></div></div><span class="bar-label">17%</span></div>
+          <div class="bar-row"><img src="images/logofuerzapopular.png" alt=""><div class="bar-col"><div class="bar-name">Fuerza Popular</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="53.3%" data-color="#FF6B35"></div></div></div><span class="bar-label">16%</span></div>
+          <div class="bar-row"><img src="images/logorenovacion.png" alt=""><div class="bar-col"><div class="bar-name">Renovación Popular</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="50%" data-color="#2196F3"></div></div></div><span class="bar-label">15%</span></div>
+          <div class="bar-row"><img src="images/logoalianza.png" alt=""><div class="bar-col"><div class="bar-name">Alianza para el Progreso</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="46.7%" data-color="#2196F3"></div></div></div><span class="bar-label">14%</span></div>
+          <div class="bar-row"><img src="images/logoperuprimero.png" alt=""><div class="bar-col"><div class="bar-name">Perú Primero</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="36.7%" data-color="#e74c3c"></div></div></div><span class="bar-label">11%</span></div>
+          <div class="bar-row"><img src="images/logopaisparatodos.png" alt=""><div class="bar-col"><div class="bar-name">País Para Todos</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="23.3%" data-color="#f39c12"></div></div></div><span class="bar-label">7%</span></div>
+          <div class="bar-row"><img src="images/logopodemosperu.png" alt=""><div class="bar-col"><div class="bar-name">Podemos Perú</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="20%" data-color="#2196F3"></div></div></div><span class="bar-label">6%</span></div>
+        </div>
+      </div>
+    </div>
 
+    <!-- SEC 3: Voto preferencial Senadores -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">Voto Preferencial — Cámara de Senadores</div>
+      </div>
+      <div class="section-body">
+        <div class="scroll-wrapper">
+          <div class="candidates-grid">
+            <div class="party-card" data-color="#2196F3">
+              <img class="party-card-logo" alt="Renovación Popular" src="images/logosomosperu.png"/>
+              <div class="party-card-name">Somos Perú</div>
+              <div class="party-card-percentage is-label">1 Representante</div>
+            </div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- SEC 4: Diputados -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">¿Quiénes representarán a Loreto en la Cámara de Diputados?</div>
+      </div>
+      <div class="section-body">
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="cards" data-section="dip">Tarjetas</button>
+          <button class="view-btn" data-view="bars" data-section="dip">Barras</button>
+        </div>
 
-<div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Acción Popular" src="images/logopodemosperu.png"/>
-<div class="party-card-name">Podemos Perú</div>
-<div class="party-card-percentage">5%</div>
-</div>
+        <div class="scroll-wrapper" id="dip-cards-view">
+          <div class="candidates-grid">
+              
+              <div class="party-card" data-color="#FF6B35"><img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/><div class="party-card-name">Fuerza Popular</div><div class="party-card-percentage">20%</div></div>
+               
+            <div class="party-card" data-color="#2196F3"><img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/><div class="party-card-name">Renovación Popular</div><div class="party-card-percentage">19%</div></div>
+              
+              
+                <div class="party-card" data-color="#e74c3c"><img class="party-card-logo" alt="Avanza País" src="images/logosomosperu.png"/><div class="party-card-name">Somos Perú </div><div class="party-card-percentage">13%</div></div>
+              
+                 
+            <div class="party-card" data-color="#2196F3"><img class="party-card-logo" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-card-name">Alianza para el Progreso</div><div class="party-card-percentage">11%</div></div>
+              
+              
+                 
+            <div class="party-card" data-color="#f39c12"><img class="party-card-logo" alt="País Para Todos" src="images/logopaisparatodos.png"/><div class="party-card-name">País Para Todos</div><div class="party-card-percentage">8%</div></div>
+            
+        <div class="party-card" data-color="#2196F3"><img class="party-card-logo" alt="Alianza para el Progreso" src="images/logopodemosperu.png"/><div class="party-card-name">Podemos Perú</div><div class="party-card-percentage">7%</div></div>
+              
+         
+              
+            <div class="party-card" data-color="special"><img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/><div class="party-card-name">No sabe / No opina</div><div class="party-card-percentage" style="background:#95a5a6">8%</div></div>
+              
+            <div class="party-card" data-color="special"><img class="party-card-logo" alt="Otros" src="images/otros.png"/><div class="party-card-name">Otros partidos</div><div class="party-card-percentage" style="background:#95a5a6">3%</div></div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más partidos</div>
+        </div>
 
+        <div class="bar-list" id="dip-bars-view">
+          <div class="bar-row"><img src="images/logofuerzapopular.png" alt=""><div class="bar-col"><div class="bar-name">Fuerza Popular</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="66.7%" data-color="#FF6B35"></div></div></div><span class="bar-label">20%</span></div>
+          <div class="bar-row"><img src="images/logorenovacion.png" alt=""><div class="bar-col"><div class="bar-name">Renovación Popular</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="63.3%" data-color="#2196F3"></div></div></div><span class="bar-label">19%</span></div>
+          <div class="bar-row"><img src="images/logosomosperu.png" alt=""><div class="bar-col"><div class="bar-name">Somos Perú</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="43.3%" data-color="#e74c3c"></div></div></div><span class="bar-label">13%</span></div>
+          <div class="bar-row"><img src="images/logoalianza.png" alt=""><div class="bar-col"><div class="bar-name">Alianza para el Progreso</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="36.7%" data-color="#2196F3"></div></div></div><span class="bar-label">11%</span></div>
+          <div class="bar-row"><img src="images/logopaisparatodos.png" alt=""><div class="bar-col"><div class="bar-name">País Para Todos</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="26.7%" data-color="#f39c12"></div></div></div><span class="bar-label">8%</span></div>
+          <div class="bar-row"><img src="images/logopodemosperu.png" alt=""><div class="bar-col"><div class="bar-name">Podemos Perú</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="23.3%" data-color="#2196F3"></div></div></div><span class="bar-label">7%</span></div>
+        </div>
+      </div>
+    </div>
 
-<div class="party-card" data-color="special">
-<img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/>
-<div class="party-card-name">No sabe / No opina</div>
-<div class="party-card-percentage">15%</div>
-</div>
+    <!-- SEC 5: Voto preferencial Diputados -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div class="section-title">Voto Preferencial — Cámara de Diputados</div>
+      </div>
+      <div class="section-body">
+        <div class="scroll-wrapper">
+          <div class="candidates-grid">
+              
+              
+                 <div class="party-card" data-color="#FF6B35">
+              <img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
+              <div class="party-card-name">Fuerza Popular</div>
+              <div class="party-card-percentage is-label">1 Representante</div>
+            </div>
+              
+              
+            <div class="party-card" data-color="#2196F3">
+              <img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
+              <div class="party-card-name">Renovación Popular</div>
+              <div class="party-card-percentage is-label">2 Representantes</div>
+            </div>
+              
+              
+         
+              
+              
+            <div class="party-card" data-color="#e74c3c">
+              <img class="party-card-logo" alt="Ahora Nación" src="images/logosomosperu.png"/>
+              <div class="party-card-name">Somos Perú</div>
+              <div class="party-card-percentage is-label">1 Representante</div>
+            </div>
+              
+              
+                
+            <div class="party-card" data-color="#e74c3c">
+              <img class="party-card-logo" alt="Ahora Nación" src="images/logoalianza.png"/>
+              <div class="party-card-name">Alianza Para el Progreso</div>
+              <div class="party-card-percentage is-label">1 Representante</div>
+            </div>
+              
+              
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+      </div>
+    </div>
 
-<div class="party-card" data-color="special">
-<img class="party-card-logo" alt="Otros" src="images/otros.png"/>
-<div class="party-card-name">Otros partidos</div>
-<div class="party-card-percentage">3%</div>
-</div>
+    <!-- FICHA TÉCNICA -->
+    <div class="ficha-section">
+      <div class="ficha-header">
+        <span class="ficha-header-icon">📋</span>
+        <span class="ficha-header-title">Ficha Técnica — Encuesta Intención de Voto Marzo 2026</span>
+      </div>
+      <div class="ficha-body">
+        <div class="ficha-col">
+          <table class="ficha-table">
+            <tr><td>Encuestadora</td><td>IDR Consultores E.I.R.L.</td></tr>
+            <tr><td>Registro JNE</td><td>00456-REE/JNE</td></tr>
+            <tr><td>Cliente</td><td>Recursos propios</td></tr>
+            <tr><td>Cobertura</td><td>La metrópolis de Maynas: distritos de Iquitos, Belén, Punchana y San Juan</td></tr>
+            <tr><td>Objetivo General</td><td>Obtener información de tipo político, socioeconómico y electoral en la provincia de Maynas</td></tr>
+            <tr><td>Grupo Objetivo</td><td>Hombres y Mujeres, 18 a 65 años, todos los niveles socioeconómicos</td></tr>
+            <tr><td>Técnica</td><td>Encuestas en hogares y electores de a pie</td></tr>
+            <tr><td>Selección</td><td>Aleatoria</td></tr>
+            <tr><td>Metodología</td><td>Por distritos, desde un punto estratégico popular, hacia puntos ascendentes y descendentes</td></tr>
+            <tr><td>Sistema de Muestreo</td><td>Probabilístico y estratificado por tamaño poblacional (electores 18–65 años)</td></tr>
+            <tr><td>Margen de Error</td><td class="highlight">±2% — Confianza 95%<span></span></td></tr>
+            <tr><td>Supervisión</td><td>100% del trabajo de cada encuestador</td></tr>
+            <tr><td>Trabajo de Campo</td><td>Del 16 al 27 de Marzo del 2026</td></tr>
+            <tr><td>Responsable</td><td>Angela Morales – Coordinadora</td></tr>
+            <tr><td>Personal de Campo</td><td>06 Encuestadores / 02 Supervisores</td></tr>
+            <tr><td>Dirección</td><td>Iquitos</td></tr>
+            <tr><td>Correo / Celular</td><td>idrconsultoreseirl@gmail.com / 917 183 289</td></tr>
+            <tr><td>Página Web</td><td>www.idrconsultores.com</td></tr>
+          </table>
+        </div>
+        <div class="ficha-col">
+          <table class="muestra-table">
+            <thead>
+              <tr><th>Distrito</th><th>Peso Poblacional</th><th>%</th><th>Tamaño Muestral</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Iquitos</td><td>124,245</td><td>39%</td><td>930</td></tr>
+              <tr><td>Punchana</td><td>63,490</td><td>20%</td><td>478</td></tr>
+              <tr><td>Belén</td><td>49,477</td><td>16%</td><td>382</td></tr>
+              <tr><td>San Juan Bautista</td><td>80,491</td><td>25%</td><td>596</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>TOTAL</td><td>317,703</td><td>100%</td><td>2,386</td></tr>
+            </tfoot>
+          </table>
+          <p class="muestra-source">*Fuente: Población electoral RENIEC ABRIL 2021</p>
+          <div class="ficha-notes">
+            <strong>Cobertura:</strong> La metrópolis de Maynas: distritos de Iquitos, Belén, Punchana y San Juan Bautista.<br>
+            <strong>Objetivo:</strong> Obtener información política, socioeconómica y electoral en la provincia de Maynas.<br>
+            <strong>Grupo objetivo:</strong> Hombres y mujeres, 18 a 65 años, todos los niveles socioeconómicos<br>
+            <strong>Muestreo:</strong> Diseño muestral probabilístico y estratificado por tamaño poblacional.
+          </div>
+        </div>
+      </div>
+    </div>
 
-</div>
-<div class="scroll-hint">↔ Desliza para ver más partidos</div>
-</section>
+  </div><!-- fin nacional-data -->
 
-<section class="poll-section">
-<h2>Voto preferencial para la Cámara de Senadores</h2>
-<div class="candidates-grid">
+  <!-- ===== REGIONAL =====-------------------------------------------------------------------------------------- -->
+  <div class="survey-data" id="regional-data">
 
-<div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
-<div class="candidate-photo">
-<img alt="Jorge Morante" src="images/jorgemorante.jpg"/>
-<div class="candidate-name-overlay">Jorge Morante</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-</div>
+    <!-- SEC 1: Presidente Regional -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">1</div>
+        <div class="section-title">Quién sería el proximo gobernador regional de Loreto</div>
+      </div>
+      <div class="section-body">
+        <div class="view-toggle">
+          <button class="view-btn active" data-view="cards" data-section="reg-pres">Tarjetas</button>
+          <button class="view-btn" data-view="bars" data-section="reg-pres">Barras</button>
+        </div>
+        <div class="scroll-wrapper" id="reg-pres-cards-view">
+            
+            
+          <div class="candidates-grid">
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Keiko Fujimori" src="images/mera.png"/>
+                <div class="candidate-name-overlay">JORGE MERA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Fuerza Popular" src="images/logorenovacion.png"/><div class="party-name">Renovación popular</div></div>
+                <div class="percentage-section">17%</div>
+              </div>
+            </div>
+              
+              
+              
+             <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="César Acuña" src="images/fernandomelendez.png"/>
+                <div class="candidate-name-overlay">FERNANDO MELENDEZ</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-name">Alianza para el Progreso</div></div>
+                <div class="percentage-section">16%</div>
+              </div>
+            </div>
+              
+              
+              
+                         <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Rafael López Aliaga" src="images/vladimir-chong.png"/>
+                <div class="candidate-name-overlay">Vladimir Chong</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Renovación Popular" src="images/logosomosperu.png"/><div class="party-name">Somos Perú</div></div>
+                <div class="percentage-section">12%</div>
+              </div>
+            </div>
+              
+        
+            
+              
+              
+            <div class="candidate-card" data-color="#FF6B35">
+              <div class="candidate-photo">
+                <img alt="César Acuña" src="images/olmexescalante.png"/>
+                <div class="candidate-name-overlay">Olmex Escalante</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Alianza para el Progreso" src="images/logofuerzapopular.png"/><div class="party-name">Fuerza Popular</div></div>
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
+              
+              
+            <div class="candidate-card" data-color="#f39c12">
+              <div class="candidate-photo">
+                <img alt="George Forsyth" src="images/wilfredomalpartida.png"/>
+                <div class="candidate-name-overlay">Wilfredo Malpartida</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Somos Perú" src="images/logopaisparatodos.png"/><div class="party-name">País para todos</div></div>
+                <div class="percentage-section">7%</div>
+              </div>
+            </div>
+              
+              
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Mario Vizcarra" src="images/percuflores.png"/>
+                <div class="candidate-name-overlay">percy flores</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Perú Primero" src="images/logoaccionpopular.png"/><div class="party-name">Acción popular</div></div>
+                <div class="percentage-section">6%</div>
+              </div>
+            </div>
+              
+              
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Carlos Álvarez" src="images/juanbaldeon.png"/>
+                <div class="candidate-name-overlay">juan baldeon </div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="País para Todos" src="images/logopodemosperu.png"/><div class="party-name">Podemos Perú</div></div>
+                <div class="percentage-section">5%</div>
+              </div>
+            </div>
+              
+              
+          
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="No sabe" src="images/nosabe.png"/><div class="candidate-name-overlay">NO SABE / NO OPINA</div></div>
+              <div class="card-bottom"><div class="percentage-section">25%</div></div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="Otros" src="images/otros.png"/><div class="candidate-name-overlay">OTROS CANDIDATOS</div></div>
+              <div class="card-bottom"><div class="percentage-section">4%</div></div>
+                
+                
+            </div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+          
+       <!--    
+        <div class="bar-list" id="reg-pres-bars-view">
+          <div class="bar-row"><img src="images/logofuerzapopular.png" alt=""><div class="bar-col"><div class="bar-name">Keiko Fujimori</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="63.3%" data-color="#FF6B35"></div></div></div><span class="bar-label">19%</span></div>
+          <div class="bar-row"><img src="images/logorenovacion.png" alt=""><div class="bar-col"><div class="bar-name">Rafael López Aliaga</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="60%" data-color="#2196F3"></div></div></div><span class="bar-label">18%</span></div>
+          <div class="bar-row"><img src="images/logoalianza.png" alt=""><div class="bar-col"><div class="bar-name">César Acuña</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="50%" data-color="#2196F3"></div></div></div><span class="bar-label">15%</span></div>
+          <div class="bar-row"><img src="images/logosomosperu.png" alt=""><div class="bar-col"><div class="bar-name">George Forsyth</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="46.7%" data-color="#e74c3c"></div></div></div><span class="bar-label">14%</span></div>
+          <div class="bar-row"><img src="images/logoperuprimero.png" alt=""><div class="bar-col"><div class="bar-name">Mario Vizcarra</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="36.7%" data-color="#e74c3c"></div></div></div><span class="bar-label">11%</span></div>
+          <div class="bar-row"><img src="images/logopaisparatodos.png" alt=""><div class="bar-col"><div class="bar-name">Carlos Álvarez</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="26.7%" data-color="#f39c12"></div></div></div><span class="bar-label">8%</span></div>
+          <div class="bar-row"><img src="images/logopodemosperu.png" alt=""><div class="bar-col"><div class="bar-name">Jose Luna</div><div class="bar-track"><div class="bar-fill" style="width:0%" data-width="16.7%" data-color="#2196F3"></div></div></div><span class="bar-label">5%</span></div>
+        </div>
+      </div>
+    </div> -->
 
-</div>
-<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
-</section>
+    <!-- SEC 2: Alcalde Maynas -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">2</div>
+        <div class="section-title">¿Quién sería el próximo Alcalde de la Provincia de Maynas?</div>
+      </div>
+      <div class="section-body">
+        <div class="scroll-wrapper">
+          <div class="candidates-grid">
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Roger Gronerth" src="images/Roger-Gronerth.jpg"/>
+                <div class="candidate-name-overlay">ROGER GRONERTH</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/><div class="party-name">Somos Perú</div></div>
+                <div class="percentage-section">25%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#FF6B35">
+              <div class="candidate-photo">
+                <img alt="Boris Morey" src="images/borismorey.jpg"/>
+                <div class="candidate-name-overlay">BORIS MOREY</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/><div class="party-name">Fuerza Popular</div></div>
+                <div class="percentage-section">16%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Joel Parimango" src="images/joelparimango.jpg"/>
+                <div class="candidate-name-overlay">JOEL PARIMANGO</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-name">Alianza para el Progreso</div></div>
+                <div class="percentage-section">11%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#27ae60">
+              <div class="candidate-photo">
+                <img alt="Maritza Paz" src="images/maritapaz.jpg"/>
+                <div class="candidate-name-overlay">MARITZA PAZ</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Fe en el Perú" src="images/logofeenelperu.png"/><div class="party-name">Fe en el Perú</div></div>
+                <div class="percentage-section">9%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Tony Mori" src="images/tony-mory.jpg"/>
+                <div class="candidate-name-overlay">TONY MORI</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Podemos Perú" src="images/logopodemosperu.png"/><div class="party-name">Podemos Perú</div></div>
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Sergio Donayre" src="images/sergio-donayre.jpg"/>
+                <div class="candidate-name-overlay">SERGIO DONAYRE</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/><div class="party-name">Renovación Popular</div></div>
+                <div class="percentage-section">6%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Jeyson Mariñas" src="images/jeysonmarinas.jpg"/>
+                <div class="candidate-name-overlay">JEYSON MARIÑAS</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Perú Primero" src="images/logoperuprimero.png"/><div class="party-name">Perú Primero</div></div>
+                <div class="percentage-section">5%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="No sabe" src="images/nosabe.png"/><div class="candidate-name-overlay">NO SABE / NO OPINA</div></div>
+              <div class="card-bottom"><div class="percentage-section">15%</div></div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="Otros" src="images/otros.png"/><div class="candidate-name-overlay">OTROS CANDIDATOS</div></div>
+              <div class="card-bottom"><div class="percentage-section">5%</div></div>
+            </div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+      </div>
+    </div>
 
-<section class="poll-section">
-<h2>¿Quiénes representarán a Loreto en la Cámara de Diputados?</h2>
-<div class="candidates-grid">
+    <!-- SEC 3: Alcalde San Juan Bautista -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">3</div>
+        <div class="section-title">¿Quién sería el próximo Alcalde de San Juan Bautista?</div>
+      </div>
+      <div class="section-body">
+        <div class="scroll-wrapper">
+          <div class="candidates-grid">
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Víctor González" src="images/victorgonzales.jpg"/>
+                <div class="candidate-name-overlay">VÍCTOR GONZÁLEZ</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/><div class="party-name">Somos Perú</div></div>
+                <div class="percentage-section">28%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#FF6B35">
+              <div class="candidate-photo">
+                <img alt="Francisco Sanjurjo" src="images/franciscosanjurjo.jpg"/>
+                <div class="candidate-name-overlay">FRANCISCO SANJURJO</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/><div class="party-name">Fuerza Popular</div></div>
+                <div class="percentage-section">13%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Alcides Vela" src="images/alcidesvela.jpg"/>
+                <div class="candidate-name-overlay">ALCIDES VELA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-name">Alianza para el Progreso</div></div>
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#1565c0">
+              <div class="candidate-photo">
+                <img alt="Julio Mesia" src="images/juliomesias.jpg"/>
+                <div class="candidate-name-overlay">JULIO MESIA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Avanza País" src="images/logoavanzapais.png"/><div class="party-name">Avanza País</div></div>
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Daniel Yabar" src="images/danielyabar.jpg"/>
+                <div class="candidate-name-overlay">DANIEL YABAR</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/><div class="party-name">Renovación Popular</div></div>
+                <div class="percentage-section">6%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#f39c12">
+              <div class="candidate-photo">
+                <img alt="Max Guerrero" src="images/maxguerrero.jpg"/>
+                <div class="candidate-name-overlay">MAX GUERRERO</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="País para Todos" src="images/logopaisparatodos.png"/><div class="party-name">País para Todos</div></div>
+                <div class="percentage-section">6%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Carlos Vela" src="images/carlosvela.jpg"/>
+                <div class="candidate-name-overlay">CARLOS VELA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Perú Primero" src="images/logoperuprimero.png"/><div class="party-name">Perú Primero</div></div>
+                <div class="percentage-section">5%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="No sabe" src="images/nosabe.png"/><div class="candidate-name-overlay">NO SABE / NO OPINA</div></div>
+              <div class="card-bottom"><div class="percentage-section">23%</div></div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="Otros" src="images/otros.png"/><div class="candidate-name-overlay">OTROS CANDIDATOS</div></div>
+              <div class="card-bottom"><div class="percentage-section">3%</div></div>
+            </div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+      </div>
+    </div>
 
-    
-  <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-card-name">Somos Perú</div>
-<div class="party-card-percentage">21%</div>
-</div>  
-    
-<div class="party-card" data-color="#FF6B35">
-<img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-card-name">Fuerza Popular</div>
-<div class="party-card-percentage">20%</div>
-</div>
+    <!-- SEC 4: Alcalde Punchana -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">4</div>
+        <div class="section-title">¿Quién sería el próximo Alcalde de Punchana?</div>
+      </div>
+      <div class="section-body">
+        <div class="scroll-wrapper">
+          <div class="candidates-grid">
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Jairo Bicerra" src="images/jairobicerra.jpg"/>
+                <div class="candidate-name-overlay">JAIRO BICERRA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/><div class="party-name">Somos Perú</div></div>
+                <div class="percentage-section">30%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Alber Guerra" src="images/alberguerra.jpg"/>
+                <div class="candidate-name-overlay">ALBER GUERRA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-name">Alianza para el Progreso</div></div>
+                <div class="percentage-section">13%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Duncan Donayre" src="images/duncandonayre.jpg"/>
+                <div class="candidate-name-overlay">DUNCAN DONAYRE</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/><div class="party-name">Renovación Popular</div></div>
+                <div class="percentage-section">12%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#FF6B35">
+              <div class="candidate-photo">
+                <img alt="Joaquín Pardavé" src="images/joaquinpardave.jpg"/>
+                <div class="candidate-name-overlay">JOAQUÍN PARDAVÉ</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/><div class="party-name">Fuerza Popular</div></div>
+                <div class="percentage-section">12%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#e91e8c">
+              <div class="candidate-photo">
+                <img alt="Rolin Meza" src="images/rolinmeza.jpg"/>
+                <div class="candidate-name-overlay">ROLIN MEZA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Perú Moderno" src="images/logoperumoderno.png"/><div class="party-name">Perú Moderno</div></div>
+                <div class="percentage-section">12%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Sadith Dávila" src="images/sadithdavila.jpg"/>
+                <div class="candidate-name-overlay">SADITH DÁVILA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Podemos Perú" src="images/logopodemosperu.png"/><div class="party-name">Podemos Perú</div></div>
+                <div class="percentage-section">8%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="No sabe" src="images/nosabe.png"/><div class="candidate-name-overlay">NO SABE / NO OPINA</div></div>
+              <div class="card-bottom"><div class="percentage-section">11%</div></div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="Otros" src="images/otros.png"/><div class="candidate-name-overlay">OTROS CANDIDATOS</div></div>
+              <div class="card-bottom"><div class="percentage-section">2%</div></div>
+            </div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- SEC 5: Alcalde Belén -->
+    <div class="poll-section">
+      <div class="section-header">
+        <div class="section-number">5</div>
+        <div class="section-title">¿Quién sería el próximo Alcalde de Belén?</div>
+      </div>
+      <div class="section-body">
+        <div class="scroll-wrapper">
+          <div class="candidates-grid">
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Max Vela" src="images/max-vela.jpg"/>
+                <div class="candidate-name-overlay">MAX VELA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/><div class="party-name">Somos Perú</div></div>
+                <div class="percentage-section">22%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Paulinho Reátegui" src="images/paulinoreategui.jpg"/>
+                <div class="candidate-name-overlay">PAULINHO REÁTEGUI</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Alianza para el Progreso" src="images/logoalianza.png"/><div class="party-name">Alianza para el Progreso</div></div>
+                <div class="percentage-section">19%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Roger Vasquez" src="images/rogervasquez.jpg"/>
+                <div class="candidate-name-overlay">ROGER VASQUEZ</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/><div class="party-name">Renovación Popular</div></div>
+                <div class="percentage-section">16%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#FF6B35">
+              <div class="candidate-photo">
+                <img alt="Tony Isuiza" src="images/tonyisuiza.jpg"/>
+                <div class="candidate-name-overlay">TONY ISUIZA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/><div class="party-name">Fuerza Popular</div></div>
+                <div class="percentage-section">12%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#2196F3">
+              <div class="candidate-photo">
+                <img alt="Christian Cavero" src="images/christiancavero.jpg"/>
+                <div class="candidate-name-overlay">CHRISTIAN CAVERO</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Podemos Perú" src="images/logopodemosperu.png"/><div class="party-name">Podemos Perú</div></div>
+                <div class="percentage-section">7%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#1565c0">
+              <div class="candidate-photo">
+                <img alt="Hermógenes Flores" src="images/hermogenesflores.jpg"/>
+                <div class="candidate-name-overlay">HERMÓGENES FLORES</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Avanza País" src="images/logoavanzapais.png"/><div class="party-name">Avanza País</div></div>
+                <div class="percentage-section">4%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="#e74c3c">
+              <div class="candidate-photo">
+                <img alt="Roy Garcia" src="images/roygarcia.jpg"/>
+                <div class="candidate-name-overlay">ROY GARCIA</div>
+              </div>
+              <div class="card-bottom">
+                <div class="party-logo"><img class="party-logo-img" alt="Acción Popular" src="images/logoaccionpopular.png"/><div class="party-name">Acción Popular</div></div>
+                <div class="percentage-section">3%</div>
+              </div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="No sabe" src="images/nosabe.png"/><div class="candidate-name-overlay">NO SABE / NO OPINA</div></div>
+              <div class="card-bottom"><div class="percentage-section">16%</div></div>
+            </div>
+            <div class="candidate-card" data-color="special">
+              <div class="candidate-photo"><img alt="Otros" src="images/otros.png"/><div class="candidate-name-overlay">OTROS CANDIDATOS</div></div>
+              <div class="card-bottom"><div class="percentage-section">1%</div></div>
+            </div>
+          </div>
+          <div class="scroll-hint">Desliza para ver más candidatos</div>
+        </div>
+      </div>
+    </div>
 
+  </div>
 
-<div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
-<div class="party-card-name">Renovación Popular</div>
-<div class="party-card-percentage">17%</div>
-</div>
+        
+    <!-- FICHA TÉCNICA -->
+    <div class="ficha-section">
+      <div class="ficha-header">
+        <span class="ficha-header-icon">📋</span>
+        <span class="ficha-header-title">Ficha Técnica — Encuesta Intención de Voto Abril 2026</span>
+      </div>
+      <div class="ficha-body">
+        <div class="ficha-col">
+          <table class="ficha-table">
+            <tr><td>Encuestadora</td><td>IDR Consultores E.I.R.L.</td></tr>
+            <tr><td>Registro JNE</td><td>00456-REE/JNE</td></tr>
+            <tr><td>Cliente</td><td>Recursos propios</td></tr>
+            <tr><td>Cobertura</td><td>La metrópolis de Maynas: distritos de Iquitos, Belén, Punchana y San Juan</td></tr>
+            <tr><td>Objetivo General</td><td>Obtener información de tipo político, socioeconómico y electoral en la provincia de Maynas</td></tr>
+            <tr><td>Grupo Objetivo</td><td>Hombres y Mujeres, 18 a 65 años, todos los niveles socioeconómicos</td></tr>
+            <tr><td>Técnica</td><td>Encuestas en hogares y electores de a pie</td></tr>
+            <tr><td>Selección</td><td>Aleatoria</td></tr>
+            <tr><td>Metodología</td><td>Por distritos, desde un punto estratégico popular, hacia puntos ascendentes y descendentes</td></tr>
+            <tr><td>Sistema de Muestreo</td><td>Probabilístico y estratificado por tamaño poblacional (electores 18–65 años)</td></tr>
+            <tr><td>Margen de Error</td><td class="highlight">±2% — Confianza 95%<span></span></td></tr>
+            <tr><td>Supervisión</td><td>100% del trabajo de cada encuestador</td></tr>
+            <tr><td>Trabajo de Campo</td><td>Del 20 al 29 de Abril del 2026</td></tr>
+            <tr><td>Responsable</td><td>Angela Morales – Coordinadora</td></tr>
+            <tr><td>Personal de Campo</td><td>06 Encuestadores / 02 Supervisores</td></tr>
+            <tr><td>Dirección</td><td>Iquitos</td></tr>
+            <tr><td>Correo / Celular</td><td>idrconsultoreseirl@gmail.com / 917 183 289</td></tr>
+            <tr><td>Página Web</td><td>www.idrconsultores.com</td></tr>
+          </table>
+        </div>
+        <div class="ficha-col">
+          <table class="muestra-table">
+            <thead>
+              <tr><th>Distrito</th><th>Peso Poblacional</th><th>%</th><th>Tamaño Muestral</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Iquitos</td><td>124,245</td><td>39%</td><td>930</td></tr>
+              <tr><td>Punchana</td><td>63,490</td><td>20%</td><td>478</td></tr>
+              <tr><td>Belén</td><td>49,477</td><td>16%</td><td>382</td></tr>
+              <tr><td>San Juan Bautista</td><td>80,491</td><td>25%</td><td>596</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>TOTAL</td><td>317,703</td><td>100%</td><td>2,386</td></tr>
+            </tfoot>
+          </table>
+          <p class="muestra-source">*Fuente: Población electoral RENIEC ABRIL 2021</p>
+          <div class="ficha-notes">
+            <strong>Cobertura:</strong> La metrópolis de Maynas: distritos de Iquitos, Belén, Punchana y San Juan Bautista.<br>
+            <strong>Objetivo:</strong> Obtener información política, socioeconómica y electoral en la provincia de Maynas.<br>
+            <strong>Grupo objetivo:</strong> Hombres y mujeres, 18 a 65 años, todos los niveles socioeconómicos<br>
+            <strong>Muestreo:</strong> Diseño muestral probabilístico y estratificado por tamaño poblacional.
+          </div>
+        </div>
+      </div>
+    </div>
 
-    
-     <div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Perú Primero" src="images/logoperuprimero.png"/>
-<div class="party-card-name">Perú Primero</div>
-<div class="party-card-percentage">9%</div>
-</div>
+  </div><!-- fin nacional-data -->
+        
+</main>
 
-    
-<div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Alianza para el Progreso" src="images/logoalianza.png"/>
-<div class="party-card-name">Alianza para el Progreso</div>
-<div class="party-card-percentage">7%</div>
-</div>
-
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <strong>IDR Consultores E.I.R.L.</strong> — 
+  idrconsultoreseirl@gmail.com · 917 183 289 · www.idrconsultores.com<br>
  
-
-
-
-<div class="party-card" data-color="#f39c12">
-<img class="party-card-logo" alt="País Para Todos" src="images/logopaisparatodos.png"/>
-<div class="party-card-name">País Para Todos</div>
-<div class="party-card-percentage">6%</div>
-</div>
-    
-    <div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Acción Popular" src="images/logopodemosperu.png"/>
-<div class="party-card-name">Podemos Perú</div>
-<div class="party-card-percentage">4%</div>
-</div>
-
-<div class="party-card" data-color="special">
-<img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/>
-<div class="party-card-name">No sabe / No opina</div>
-<div class="party-card-percentage">12%</div>
-</div>
-
-<div class="party-card" data-color="special">
-<img class="party-card-logo" alt="Otros" src="images/otros.png"/>
-<div class="party-card-name">Otros partidos</div>
-<div class="party-card-percentage">4%</div>
-</div>
-
-</div>
-<div class="scroll-hint">↔ Desliza para ver más partidos</div>
-</section>
-
-<section class="poll-section">
-<h2>Voto preferencial para la Cámara de Diputados</h2>
-<div class="candidates-grid">
-
-    
-  <div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
-<div class="candidate-photo">
-<img alt="Jaime Marín" src="images/jaimemarin.jpg"/>
-<div class="candidate-name-overlay">JAIME MARÍN</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-</div>  
-    
-    
-    <div class="candidate-card" data-color="#FF6B35" data-no-percentage="true">
-<div class="candidate-photo">
-<img alt="César Vidaurre" src="images/cesarvidaurre.jpg"/>
-<div class="candidate-name-overlay">CÉSAR VIDAURRE</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-name">Fuerza Popular</div>
-</div>
-</div>
-       
-<div class="candidate-card" data-color="#2196F3" data-no-percentage="true">
-<div class="candidate-photo">
-<img alt="Anthony Mera" src="images/anthonymera.png"/>
-<div class="candidate-name-overlay">ANTHONY MERA</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/>
-<div class="party-name">Renovación Popular</div>
-</div>
-</div>
- 
-    
-  <div class="candidate-card" data-color="#e74c3c" data-no-percentage="true">
-<div class="candidate-photo">
-<img alt="Jaime Marín" src="images/almendrayarame.png"/>
-<div class="candidate-name-overlay">ALMENDRA YARAME</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-</div>  
-    
-    
-    
-
-    
-    
-
-
-
-
-
-</div>
-<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
-</section>
-
-</div>
-
-<!-- ==================== ENCUESTA REGIONAL ==================== -->
-    
-    
-<!-- 
-
-
-<div class="survey-data" id="regional-data">
-<section class="poll-section">
-<h2>Candidatos Presidente de la República - Regional</h2>
-<div class="candidates-grid">
-
-<!-- Aquí puedes editar los datos de la encuesta regional -->
-    
-    
-<!-- 
-
-<div class="candidate-card" data-color="#FF6B35">
-<div class="candidate-photo">
-<img alt="Keiko Fujimori" src="images/keyko.png"/>
-<div class="candidate-name-overlay">Lopez aliaga</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-name">Fuerza Popular</div>
-</div>
-<div class="percentage-section">50%</div>
-</div>
-
-<div class="candidate-card" data-color="#2196F3">
-<div class="candidate-photo">
-<img alt="Rafael López" src="images/rafael.png"/>
-<div class="candidate-name-overlay">RAFAEL LÓPEZ ALIAGA</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Renovación Popular" src="images/logorenovacion.png"/>
-<div class="party-name">Renovación Popular</div>
-</div>
-<div class="percentage-section">16%</div>
-</div>
-
-<div class="candidate-card" data-color="#e74c3c">
-<div class="candidate-photo">
-<img alt="George Forsyth" src="images/george.png"/>
-<div class="candidate-name-overlay">GEORGE FORSYTH</div>
-</div>
-<div class="party-logo">
-<img class="party-logo-img" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-name">Somos Perú</div>
-</div>
-<div class="percentage-section">12%</div>
-</div>
-
-<div class="candidate-card" data-color="special">
-<div class="candidate-photo">
-<img alt="No sabe" src="images/nosabe.png"/>
-<div class="candidate-name-overlay">NO SABE / NO OPINA</div>
-</div>
-<div class="percentage-section">25%</div>
-</div>
-
-<div class="candidate-card" data-color="special">
-<div class="candidate-photo">
-<img alt="Otros" src="images/otros.png"/>
-<div class="candidate-name-overlay">OTROS CANDIDATOS</div>
-</div>
-<div class="percentage-section">27%</div>
-</div>
-
-</div>
-<div class="scroll-hint">↔ Desliza para ver más candidatos</div>
-</section>
--->
-    
-    
-    
-<!-- Aquí puedes agregar más secciones para la encuesta regional -->
-
-    <!--
-    <section class="poll-section">
-<h2>¿Quiénes representarán a Loreto en la Cámara de Senadores? - Regional</h2>
-<div class="candidates-grid">
-
-<div class="party-card" data-color="#e74c3c">
-<img class="party-card-logo" alt="Somos Perú" src="images/logosomosperu.png"/>
-<div class="party-card-name">Somos Perú</div>
-<div class="party-card-percentage">16%</div>
-</div>
-
-<div class="party-card" data-color="#FF6B35">
-<img class="party-card-logo" alt="Fuerza Popular" src="images/logofuerzapopular.png"/>
-<div class="party-card-name">Fuerza Popular</div>
-<div class="party-card-percentage">15%</div>
-</div>
-
-<div class="party-card" data-color="#2196F3">
-<img class="party-card-logo" alt="Renovación Popular" src="images/logorenovacion.png"/>
-<div class="party-card-name">Renovación Popular</div>
-<div class="party-card-percentage">12%</div>
-</div>
-
-<div class="party-card" data-color="special">
-<img class="party-card-logo" alt="No sabe" src="images/nosabe.png"/>
-<div class="party-card-name">No sabe / No opina</div>
-<div class="party-card-percentage">20%</div>
-</div>
-
-<div class="party-card" data-color="special">
-<img class="party-card-logo" alt="Otros" src="images/otros.png"/>
-<div class="party-card-name">Otros partidos</div>
-<div class="party-card-percentage">37%</div>
-</div>
-
-</div>
-<div class="scroll-hint">↔ Desliza para ver más partidos</div>
-</section> -->
-
-<!-- Puedes agregar más secciones según necesites -->
-
-</div>
+</footer>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const select = document.getElementById('survey-select');
-  const surveyDataDivs = document.querySelectorAll('.survey-data');
-
-  select.addEventListener('change', () => {
-    const selected = select.value;
-    surveyDataDivs.forEach(div => {
-      div.classList.toggle('active', div.id === `${selected}-data`);
-    });
-  });
-
-  // Apply colors from data-color attribute
-  document.querySelectorAll('.candidate-card[data-color]').forEach(card => {
-    const color = card.getAttribute('data-color');
-    const overlay = card.querySelector('.candidate-name-overlay');
-    const percentage = card.querySelector('.percentage-section');
-    
-    if (color !== 'special') {
-      if (overlay) overlay.style.backgroundColor = color;
-      if (percentage) percentage.style.backgroundColor = color;
-    } else {
-      if (overlay) overlay.style.backgroundColor = '#95a5a6';
-      if (percentage) percentage.style.backgroundColor = '#95a5a6';
-    }
-  });
-
-  document.querySelectorAll('.party-card[data-color]').forEach(card => {
-    const color = card.getAttribute('data-color');
-    const percentage = card.querySelector('.party-card-percentage');
-    
-    if (percentage) {
-      if (color !== 'special') {
-        percentage.style.backgroundColor = color;
-      } else {
-        percentage.style.backgroundColor = '#95a5a6';
-      }
-    }
-  });
-
-  // Animate on load
-  setTimeout(() => {
-    document.querySelectorAll('.percentage-section').forEach((section, index) => {
-      section.style.opacity = '0';
-      setTimeout(() => {
-        section.style.transition = 'opacity 0.5s ease-in';
-        section.style.opacity = '1';
-      }, index * 100);
-    });
-  }, 300);
+/* =========================================================
+   1. APPLY COLORS from data-color attribute
+   ========================================================= */
+document.querySelectorAll('.candidate-card[data-color]').forEach(card => {
+  const color = card.getAttribute('data-color');
+  if (color === 'special') return;
+  const overlay = card.querySelector('.candidate-name-overlay');
+  const pct     = card.querySelector('.percentage-section');
+  const noImg   = card.querySelector('.candidate-photo');
+  if (overlay && !card.querySelector('.candidate-photo img')) {
+    overlay.style.background = color;
+  }
+  if (pct)   pct.style.background = color;
+  if (noImg && card.getAttribute('data-no-percentage') === 'true') {
+    noImg.style.borderTop = `4px solid ${color}`;
+  }
 });
-</script>
 
+document.querySelectorAll('.party-card[data-color]').forEach(card => {
+  const color = card.getAttribute('data-color');
+  if (color === 'special') return;
+  const pct = card.querySelector('.party-card-percentage');
+  if (pct) pct.style.background = color;
+});
+
+/* =========================================================
+   2. SURVEY TABS
+   ========================================================= */
+const SURVEY_DATES = {
+  'nacional-data': 'Del 25 de Marzo al 02 de Abril del 2026',
+  'regional-data': 'Del 20 al 29 de Abril del 2026'
+};
+
+function updateHeroDate(target) {
+  const badge = document.getElementById('hero-date-badge');
+  const dateText = document.getElementById('hero-date-text');
+  if (!dateText || !badge) return;
+  badge.style.opacity = '0';
+  setTimeout(() => {
+    dateText.textContent = SURVEY_DATES[target] || '';
+    badge.style.opacity = '1';
+  }, 200);
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.survey-data').forEach(d => d.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.target).classList.add('active');
+    updateHeroDate(btn.dataset.target);
+  });
+});
+
+/* =========================================================
+   3. VIEW TOGGLE (Cards ↔ Bars)
+   ========================================================= */
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const section = btn.dataset.section;
+    const view    = btn.dataset.view;
+
+    // Update button state within this toggle group
+    btn.closest('.view-toggle').querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cardsView = document.getElementById(`${section}-cards-view`);
+    const barsView  = document.getElementById(`${section}-bars-view`);
+
+    if (view === 'cards') {
+      cardsView.style.display = 'block';
+      barsView.style.display  = 'none';
+    } else {
+      cardsView.style.display = 'none';
+      barsView.style.display  = 'flex';
+      // Animate bars
+      setTimeout(() => {
+        barsView.querySelectorAll('.bar-fill').forEach(fill => {
+          const color = fill.dataset.color;
+          fill.style.background = color;
+          fill.style.width = fill.dataset.width;
+        });
+      }, 50);
+    }
+  });
+});
+
+/* =========================================================
+   4. MOBILE NAV TOGGLE
+   ========================================================= */
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+}
+</script>
 </body>
 </html>
